@@ -234,7 +234,26 @@ public class LogFormatRecommenderImpl implements LogFormatRecommender {
         return recommendations.stream()
             .filter(rec -> rec.getConfidence() >= options.getMinConfidence())
             .filter(rec -> options.isIncludePartialMatches() || rec.isCompleteMatch())
-            .sorted(Comparator.comparingDouble(FormatRecommendation::getConfidence).reversed())
+            .sorted((r1, r2) -> {
+                // 1. 구체적인 필드가 많은 것 우선
+                int specificCount1 = countSpecificFields(r1.getMatchedFields());
+                int specificCount2 = countSpecificFields(r2.getMatchedFields());
+                
+                if (specificCount1 != specificCount2) {
+                    return specificCount2 - specificCount1;
+                }
+                
+                // 2. 전체 필드 수가 많은 것 우선 (log_time, message 제외)
+                int fieldCount1 = getEffectiveFieldCount(r1.getMatchedFields());
+                int fieldCount2 = getEffectiveFieldCount(r2.getMatchedFields());
+                
+                if (fieldCount1 != fieldCount2) {
+                    return fieldCount2 - fieldCount1;
+                }
+                
+                // 3. 마지막으로 신뢰도로 정렬
+                return Double.compare(r2.getConfidence(), r1.getConfidence());
+            })
             .limit(options.getMaxResults())
             .collect(Collectors.toList());
     }
@@ -351,6 +370,45 @@ public class LogFormatRecommenderImpl implements LogFormatRecommender {
     private String generateCacheKey(String logSample) {
         // 간단한 해시 사용
         return String.valueOf(logSample.hashCode());
+    }
+    
+    /**
+     * 구체적인 필드 수 계산
+     */
+    private int countSpecificFields(Map<String, Object> fields) {
+        if (fields == null || fields.isEmpty()) {
+            return 0;
+        }
+        
+        // 구체적인 필드 목록
+        Set<String> specificFields = new HashSet<>(Arrays.asList(
+            "src_ip", "dst_ip", "src_port", "dst_port",
+            "protocol", "action", "rule_id", "attack_id",
+            "user_id", "session_id", "event_id",
+            "src", "dst", "source", "destination"
+        ));
+        
+        return (int) fields.keySet().stream()
+            .filter(key -> specificFields.contains(key.toLowerCase()))
+            .count();
+    }
+    
+    /**
+     * log_time과 message 필드를 제외한 유효한 필드 수 계산
+     */
+    private int getEffectiveFieldCount(Map<String, Object> fields) {
+        if (fields == null || fields.isEmpty()) {
+            return 0;
+        }
+        
+        // 제외할 필드 목록
+        Set<String> excludedFields = new HashSet<>(Arrays.asList(
+            "log_time", "message", "msg", "raw_message"
+        ));
+        
+        return (int) fields.keySet().stream()
+            .filter(key -> !excludedFields.contains(key.toLowerCase()))
+            .count();
     }
     
     /**

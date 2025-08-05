@@ -209,6 +209,9 @@ public class AdvancedLogMatcher implements LogMatcher {
                 filteredCaptures  // 필터링된 결과 사용
             );
             
+            // 필드 수와 구체성에 따라 초기 신뢰도 조정
+            adjustConfidenceByFieldQuality(result, originalCaptures);
+            
             // 그룹 가중치 적용
             applyGroupWeight(result, logFormat);
             result.setGrokExpression(grokPattern);
@@ -263,7 +266,27 @@ public class AdvancedLogMatcher implements LogMatcher {
             })
             .filter(result -> result != null && 
                 (result.isCompleteMatch() || result.isPartialMatch()))
-            .sorted((r1, r2) -> Double.compare(r2.getConfidence(), r1.getConfidence()))
+            .sorted((r1, r2) -> {
+                // 먼저 구체적인 필드 점수를 계산
+                double score1 = calculateSpecificFieldScore(r1.getExtractedFields());
+                double score2 = calculateSpecificFieldScore(r2.getExtractedFields());
+                
+                // 1. 구체적인 필드 점수가 높은 것 우선
+                if (Math.abs(score1 - score2) > 0.1) {
+                    return Double.compare(score2, score1);
+                }
+                
+                // 2. 필드 수가 많은 것 우선 (log_time, message 제외)
+                int fieldCount1 = getEffectiveFieldCount(r1.getExtractedFields());
+                int fieldCount2 = getEffectiveFieldCount(r2.getExtractedFields());
+                int fieldDiff = fieldCount2 - fieldCount1;
+                if (fieldDiff != 0) {
+                    return fieldDiff;
+                }
+                
+                // 3. 마지막으로 신뢰도로 정렬
+                return Double.compare(r2.getConfidence(), r1.getConfidence());
+            })
             .collect(Collectors.toList());
         
         // 다중 완전 매칭 시 신뢰도 조정
@@ -451,8 +474,11 @@ public class AdvancedLogMatcher implements LogMatcher {
                                               LogFormat logFormat) {
         double score = 0.0;
         
+        // log_time과 message 필드를 제외한 필드 수 계산
+        int effectiveFieldCount = getEffectiveFieldCount(captures);
+        
         // 1. 필드 수 점수 (40%) - 가중치 증가
-        double fieldScore = Math.min(captures.size() / 8.0, 1.0) * 0.4;
+        double fieldScore = Math.min(effectiveFieldCount / 8.0, 1.0) * 0.4;
         
         // 2. 구체적인 필드 점수 (20%) - 새로 추가
         double specificFieldScore = calculateSpecificFieldScore(captures) * 0.2;
@@ -533,6 +559,39 @@ public class AdvancedLogMatcher implements LogMatcher {
     }
     
     /**
+     * 필드 품질에 따른 신뢰도 조정
+     */
+    private void adjustConfidenceByFieldQuality(MatchResult result, Map<String, Object> captures) {
+        if (!result.isCompleteMatch()) {
+            return;
+        }
+        
+        // log_time과 message 필드를 제외한 필드 수 계산
+        int fieldCount = getEffectiveFieldCount(captures);
+        double specificScore = calculateSpecificFieldScore(captures);
+        
+        // 기본 신뢰도: 88-98% 범위
+        double baseConfidence;
+        
+        if (specificScore >= 0.75) {
+            // 매우 구체적인 필드들 (src_ip, dst_ip, protocol 등이 3개 이상)
+            baseConfidence = 96.0 + (fieldCount * 0.3);
+        } else if (specificScore >= 0.5) {
+            // 구체적인 필드들 (2개 정도)
+            baseConfidence = 93.0 + (fieldCount * 0.4);
+        } else if (specificScore >= 0.25) {
+            // 약간의 구체적인 필드 (1개)
+            baseConfidence = 90.0 + (fieldCount * 0.5);
+        } else {
+            // 일반적인 필드들만 있는 경우
+            baseConfidence = 88.0 + (fieldCount * 0.3);
+        }
+        
+        // 최대 98% 제한
+        result.setConfidence(Math.min(baseConfidence, 98.0));
+    }
+    
+    /**
      * 그룹 가중치 적용
      */
     private void applyGroupWeight(MatchResult result, LogFormat logFormat) {
@@ -565,7 +624,8 @@ public class AdvancedLogMatcher implements LogMatcher {
             for (MatchResult result : results) {
                 if (result.isCompleteMatch()) {
                     Map<String, Object> fields = result.getExtractedFields();
-                    int fieldCount = fields.size();
+                    // log_time과 message 필드를 제외한 필드 수 계산
+                    int fieldCount = getEffectiveFieldCount(fields);
                     
                     // 구체적인 필드 수 계산
                     Set<String> specificFields = new HashSet<>(Arrays.asList(
@@ -666,5 +726,23 @@ public class AdvancedLogMatcher implements LogMatcher {
         logger.debug("필터링 후 필드: {}", filtered);
         
         return filtered;
+    }
+    
+    /**
+     * log_time과 message 필드를 제외한 유효한 필드 수 계산
+     */
+    private int getEffectiveFieldCount(Map<String, Object> fields) {
+        if (fields == null || fields.isEmpty()) {
+            return 0;
+        }
+        
+        // 제외할 필드 목록
+        Set<String> excludedFields = new HashSet<>(Arrays.asList(
+            "log_time", "message", "msg", "raw_message"
+        ));
+        
+        return (int) fields.keySet().stream()
+            .filter(key -> !excludedFields.contains(key.toLowerCase()))
+            .count();
     }
 }
