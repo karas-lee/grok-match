@@ -6,6 +6,7 @@ import com.logcenter.recommender.grok.validator.*;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.model.MatchResult;
 import com.logcenter.recommender.filter.PatternFilter;
+import com.logcenter.recommender.util.GrokPatternParser;
 import io.krakens.grok.api.Grok;
 import io.krakens.grok.api.Match;
 import org.slf4j.Logger;
@@ -133,12 +134,38 @@ public class AdvancedLogMatcher implements LogMatcher {
      */
     private MatchResult performMatch(String logLine, LogFormat logFormat) {
         String normalizedLog = normalizeLogLine(logLine);
+        
+        // 모든 LogType의 모든 패턴을 확인
+        if (logFormat.getLogTypes() != null) {
+            for (LogFormat.LogType logType : logFormat.getLogTypes()) {
+                if (logType.getPatterns() != null) {
+                    for (LogFormat.Pattern pattern : logType.getPatterns()) {
+                        if (pattern.getGrokExp() != null) {
+                            MatchResult result = matchPattern(normalizedLog, pattern.getGrokExp(), 
+                                logFormat, pattern.getExpName());
+                            if (result.isCompleteMatch()) {
+                                return result;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 기본 패턴으로 시도 (하위 호환성)
         String grokPattern = logFormat.getGrokPattern();
         
         if (grokPattern == null || grokPattern.trim().isEmpty()) {
             return MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
         }
         
+        return matchPattern(normalizedLog, grokPattern, logFormat, null);
+    }
+    
+    /**
+     * 단일 패턴 매칭
+     */
+    private MatchResult matchPattern(String logLine, String grokPattern, LogFormat logFormat, String patternName) {
         // 너무 일반적인 패턴 필터링
         if (PatternFilter.isOverlyGeneric(grokPattern)) {
             logger.debug("너무 일반적인 패턴 건너뛰기 - 포맷: {}, 패턴: {}", 
@@ -153,26 +180,33 @@ public class AdvancedLogMatcher implements LogMatcher {
         }
         
         // 패턴 매칭
-        Match grokMatch = grok.match(normalizedLog);
-        Map<String, Object> captures = grokMatch.capture();
+        Match grokMatch = grok.match(logLine);
+        Map<String, Object> originalCaptures = grokMatch.capture();
         
-        if (captures == null || captures.isEmpty()) {
+        logger.debug("로그 포맷 {}: 원본 캡처 결과 - {}", logFormat.getFormatId(), originalCaptures);
+        
+        // 원본 캡처가 비어있으면 매칭 실패
+        if (originalCaptures == null || originalCaptures.isEmpty()) {
             return MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
         }
         
-        // 필드 검증
+        // 그룹명이 지정된 필드만 필터링
+        Map<String, Object> filteredCaptures = filterNamedGroups(originalCaptures, grokPattern);
+        logger.debug("로그 포맷 {}: 필터링 후 캡처 결과 - {}", logFormat.getFormatId(), filteredCaptures);
+        
+        // 필드 검증 (필터링된 결과에 대해)
         if (options.isValidateFields()) {
-            captures = validateFields(captures);
+            filteredCaptures = validateFields(filteredCaptures);
         }
         
-        // 매칭 결과 평가
-        boolean isComplete = evaluateCompleteMatch(normalizedLog, captures, logFormat);
+        // 매칭 결과 평가 (원본 캡처 기준)
+        boolean isComplete = evaluateCompleteMatch(logLine, originalCaptures, logFormat);
         
         if (isComplete) {
             MatchResult result = MatchResult.completeMatch(
                 logFormat.getFormatId(),
                 logFormat.getFormatName(),
-                captures
+                filteredCaptures  // 필터링된 결과 사용
             );
             
             // 그룹 가중치 적용
@@ -182,13 +216,13 @@ public class AdvancedLogMatcher implements LogMatcher {
             return result;
             
         } else if (options.isPartialMatchEnabled()) {
-            double matchScore = calculateAdvancedMatchScore(normalizedLog, captures, logFormat);
+            double matchScore = calculateAdvancedMatchScore(logLine, originalCaptures, logFormat);
             
             if (matchScore > 0.3) { // 최소 임계값
                 MatchResult result = MatchResult.partialMatch(
                     logFormat.getFormatId(),
                     logFormat.getFormatName(),
-                    captures,
+                    filteredCaptures,  // 필터링된 결과 사용
                     matchScore
                 );
                 
@@ -369,6 +403,25 @@ public class AdvancedLogMatcher implements LogMatcher {
             return false;
         }
         
+        // 최소 필드 수 기준 (3개 초과)
+        if (captures.size() <= 3) {
+            // 특별히 구체적인 필드가 있는 경우 예외 처리
+            Set<String> specificFields = new HashSet<>(Arrays.asList(
+                "src_ip", "dst_ip", "src_port", "dst_port",
+                "protocol", "action", "rule_id", "attack_id",
+                "src", "dst", "source", "destination"
+            ));
+            
+            long specificCount = captures.keySet().stream()
+                .filter(key -> specificFields.contains(key.toLowerCase()))
+                .count();
+            
+            // 구체적인 필드가 2개 이상이면 예외적으로 허용
+            if (specificCount < 2) {
+                return false;
+            }
+        }
+        
         // 필수 필드 확인
         List<String> requiredFields = logFormat.getRequiredFields();
         if (requiredFields != null && !requiredFields.isEmpty()) {
@@ -398,38 +451,85 @@ public class AdvancedLogMatcher implements LogMatcher {
                                               LogFormat logFormat) {
         double score = 0.0;
         
-        // 1. 필드 수 점수 (30%)
-        double fieldScore = Math.min(captures.size() / 10.0, 1.0) * 0.3;
+        // 1. 필드 수 점수 (40%) - 가중치 증가
+        double fieldScore = Math.min(captures.size() / 8.0, 1.0) * 0.4;
         
-        // 2. 커버리지 점수 (30%)
+        // 2. 구체적인 필드 점수 (20%) - 새로 추가
+        double specificFieldScore = calculateSpecificFieldScore(captures) * 0.2;
+        
+        // 3. 커버리지 점수 (20%) - 가중치 감소
         int captureLength = captures.values().stream()
             .filter(Objects::nonNull)
             .mapToInt(v -> v.toString().length())
             .sum();
-        double coverageScore = Math.min((double) captureLength / logLine.length(), 1.0) * 0.3;
+        double coverageScore = Math.min((double) captureLength / logLine.length(), 1.0) * 0.2;
         
-        // 3. 검증된 필드 점수 (20%)
+        // 4. 검증된 필드 점수 (10%) - 가중치 감소
         long validatedCount = captures.keySet().stream()
             .filter(key -> fieldValidators.containsKey(key.toUpperCase()))
             .count();
         double validationScore = (captures.size() > 0) ? 
-            (double) validatedCount / captures.size() * 0.2 : 0.0;
+            (double) validatedCount / captures.size() * 0.1 : 0.0;
         
-        // 4. 필수 필드 점수 (20%)
+        // 5. 필수 필드 점수 (10%) - 가중치 감소
         double requiredScore = 0.0;
         List<String> required = logFormat.getRequiredFields();
         if (required != null && !required.isEmpty()) {
             long foundRequired = required.stream()
                 .filter(captures::containsKey)
                 .count();
-            requiredScore = (double) foundRequired / required.size() * 0.2;
+            requiredScore = (double) foundRequired / required.size() * 0.1;
         } else {
-            requiredScore = 0.2; // 필수 필드가 없으면 만점
+            requiredScore = 0.1;
         }
         
-        score = fieldScore + coverageScore + validationScore + requiredScore;
+        score = fieldScore + specificFieldScore + coverageScore + validationScore + requiredScore;
         
         return Math.min(score, 1.0);
+    }
+    
+    /**
+     * 구체적인 필드 점수 계산
+     */
+    private double calculateSpecificFieldScore(Map<String, Object> captures) {
+        double score = 0.0;
+        
+        // 구체적인 필드 목록
+        Set<String> specificFields = new HashSet<>(Arrays.asList(
+            "src_ip", "dst_ip", "src_port", "dst_port",
+            "protocol", "action", "rule_id", "attack_id",
+            "user_id", "session_id", "event_id",
+            "src", "dst", "source", "destination"
+        ));
+        
+        // 일반적인 필드
+        Set<String> genericFields = new HashSet<>(Arrays.asList(
+            "message", "data", "text", "info", "description"
+        ));
+        
+        int specificCount = 0;
+        int genericCount = 0;
+        
+        for (String field : captures.keySet()) {
+            String lowerField = field.toLowerCase();
+            if (specificFields.contains(lowerField)) {
+                specificCount++;
+            } else if (genericFields.contains(lowerField)) {
+                genericCount++;
+            }
+        }
+        
+        // 구체적인 필드가 많을수록 높은 점수
+        if (specificCount > 0) {
+            score = Math.min(specificCount / 4.0, 1.0);
+        }
+        
+        // 일반적인 필드만 있으면 점수 감소
+        if (specificCount == 0 && genericCount > 0) {
+            score = 0.2;
+        }
+        
+        return score;
     }
     
     /**
@@ -461,11 +561,37 @@ public class AdvancedLogMatcher implements LogMatcher {
             .count();
         
         if (completeMatchCount > 1) {
-            // 다중 완전 매칭 시 95-97% 범위로 조정
+            // 필드 수와 구체성에 따라 신뢰도 차등 적용
             for (MatchResult result : results) {
                 if (result.isCompleteMatch()) {
-                    double adjusted = 95.0 + (result.getConfidence() - 95.0) * 0.4;
-                    result.setConfidence(Math.min(adjusted, 97.0));
+                    Map<String, Object> fields = result.getExtractedFields();
+                    int fieldCount = fields.size();
+                    
+                    // 구체적인 필드 수 계산
+                    Set<String> specificFields = new HashSet<>(Arrays.asList(
+                        "src_ip", "dst_ip", "src_port", "dst_port",
+                        "protocol", "action", "rule_id", "attack_id",
+                        "user_id", "session_id", "event_id",
+                        "src", "dst", "source", "destination"
+                    ));
+                    
+                    long specificCount = fields.keySet().stream()
+                        .filter(key -> specificFields.contains(key.toLowerCase()))
+                        .count();
+                    
+                    // 기본 신뢰도 설정
+                    double baseConfidence = 90.0;
+                    
+                    // 필드 수에 따른 가산점 (최대 5점)
+                    double fieldBonus = Math.min(fieldCount * 0.5, 5.0);
+                    
+                    // 구체적인 필드에 따른 가산점 (최대 3점)
+                    double specificBonus = Math.min(specificCount * 1.0, 3.0);
+                    
+                    double adjustedConfidence = baseConfidence + fieldBonus + specificBonus;
+                    
+                    // 최대 98% 제한
+                    result.setConfidence(Math.min(adjustedConfidence, 98.0));
                 }
             }
         }
@@ -501,5 +627,44 @@ public class AdvancedLogMatcher implements LogMatcher {
             executorService.shutdownNow();
             Thread.currentThread().interrupt();
         }
+    }
+    
+    /**
+     * 그룹명이 지정된 필드만 필터링
+     * Grok 패턴에서 그룹명이 없는 패턴은 제거
+     */
+    private Map<String, Object> filterNamedGroups(Map<String, Object> captures, String grokPattern) {
+        if (captures == null || captures.isEmpty()) {
+            return captures;
+        }
+        
+        // Grok 패턴에서 명시적으로 지정된 필드명 추출
+        Set<String> namedFields = GrokPatternParser.extractNamedFields(grokPattern);
+        logger.debug("명시적으로 지정된 필드명: {}", namedFields);
+        logger.debug("필터링 전 캡처된 필드: {}", captures);
+        
+        Map<String, Object> filtered = new HashMap<>();
+        
+        for (Map.Entry<String, Object> entry : captures.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            
+            // 빈 값인 경우 제외
+            if (value == null || value.toString().trim().isEmpty()) {
+                logger.debug("빈 값 필터링: {} = {}", key, value);
+                continue;
+            }
+            
+            // 명시적으로 지정된 필드명만 포함
+            if (namedFields.contains(key)) {
+                filtered.put(key, value);
+            } else {
+                logger.debug("명시되지 않은 필드 필터링: {} = {}", key, value);
+            }
+        }
+        
+        logger.debug("필터링 후 필드: {}", filtered);
+        
+        return filtered;
     }
 }

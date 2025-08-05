@@ -3,6 +3,7 @@ package com.logcenter.recommender.matcher;
 import com.logcenter.recommender.grok.GrokCompilerWrapper;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.model.MatchResult;
+import com.logcenter.recommender.util.GrokPatternParser;
 import io.krakens.grok.api.Grok;
 import io.krakens.grok.api.Match;
 import org.slf4j.Logger;
@@ -66,25 +67,34 @@ public class SimpleLogMatcher implements LogMatcher {
             
             // 패턴 매칭 수행
             Match grokMatch = grok.match(normalizedLog);
-            Map<String, Object> captures = grokMatch.capture();
+            Map<String, Object> originalCaptures = grokMatch.capture();
             
-            if (captures != null && !captures.isEmpty()) {
-                // 완전 매칭 여부 확인
-                boolean isComplete = isCompleteMatch(normalizedLog, captures);
+            logger.debug("로그 포맷 {}: 원본 캡처 결과 - {}", logFormat.getFormatId(), originalCaptures);
+            
+            // 원본 캡처가 비어있으면 매칭 실패
+            if (originalCaptures == null || originalCaptures.isEmpty()) {
+                result = MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
+            } else {
+                // 그룹명이 지정된 필드만 필터링
+                Map<String, Object> filteredCaptures = filterNamedGroups(originalCaptures, grokPattern);
+                logger.debug("로그 포맷 {}: 필터링 후 캡처 결과 - {}", logFormat.getFormatId(), filteredCaptures);
+                
+                // 완전 매칭 여부 확인 (원본 캡처 기준)
+                boolean isComplete = isCompleteMatch(normalizedLog, originalCaptures);
                 
                 if (isComplete) {
                     result = MatchResult.completeMatch(
                         logFormat.getFormatId(),
                         logFormat.getFormatName(),
-                        captures
+                        filteredCaptures  // 필터링된 결과 사용
                     );
                 } else if (options.isPartialMatchEnabled()) {
-                    // 부분 매칭 점수 계산
-                    double matchScore = calculateMatchScore(normalizedLog, captures);
+                    // 부분 매칭 점수 계산 (원본 캡처 기준)
+                    double matchScore = calculateMatchScore(normalizedLog, originalCaptures);
                     result = MatchResult.partialMatch(
                         logFormat.getFormatId(),
                         logFormat.getFormatName(),
-                        captures,
+                        filteredCaptures,  // 필터링된 결과 사용
                         matchScore
                     );
                 } else {
@@ -92,8 +102,6 @@ public class SimpleLogMatcher implements LogMatcher {
                 }
                 
                 result.setGrokExpression(grokPattern);
-            } else {
-                result = MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
             }
             
         } catch (Exception e) {
@@ -289,5 +297,44 @@ public class SimpleLogMatcher implements LogMatcher {
         
         // 두 점수의 평균
         return (fieldScore + coverageScore) / 2.0;
+    }
+    
+    /**
+     * 그룹명이 지정된 필드만 필터링
+     * Grok 패턴에서 그룹명이 없는 패턴은 제거
+     */
+    private Map<String, Object> filterNamedGroups(Map<String, Object> captures, String grokPattern) {
+        if (captures == null || captures.isEmpty()) {
+            return captures;
+        }
+        
+        // Grok 패턴에서 명시적으로 지정된 필드명 추출
+        Set<String> namedFields = GrokPatternParser.extractNamedFields(grokPattern);
+        logger.debug("명시적으로 지정된 필드명: {}", namedFields);
+        logger.debug("필터링 전 캡처된 필드: {}", captures);
+        
+        Map<String, Object> filtered = new HashMap<>();
+        
+        for (Map.Entry<String, Object> entry : captures.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            
+            // 빈 값인 경우 제외
+            if (value == null || value.toString().trim().isEmpty()) {
+                logger.debug("빈 값 필터링: {} = {}", key, value);
+                continue;
+            }
+            
+            // 명시적으로 지정된 필드명만 포함
+            if (namedFields.contains(key)) {
+                filtered.put(key, value);
+            } else {
+                logger.debug("명시되지 않은 필드 필터링: {} = {}", key, value);
+            }
+        }
+        
+        logger.debug("필터링 후 필드: {}", filtered);
+        
+        return filtered;
     }
 }

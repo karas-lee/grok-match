@@ -39,14 +39,7 @@ public class LogFormatApiClientTest {
         mockHttpClient = mock(CloseableHttpClient.class);
         objectMapper = new ObjectMapper();
         
-        // 캐시 매니저 초기화 방지
-        try {
-            java.lang.reflect.Field instanceField = com.logcenter.recommender.api.cache.CacheManager.class.getDeclaredField("instance");
-            instanceField.setAccessible(true);
-            instanceField.set(null, null);
-        } catch (Exception e) {
-            // ignore
-        }
+        // Mock HTTP Client 설정
         
         // 리플렉션을 사용해 mock HttpClient 주입
         apiClient = new LogFormatApiClient("http://localhost:8080", "test-api-key");
@@ -79,13 +72,13 @@ public class LogFormatApiClientTest {
         assertTrue("Result should have at least 1 format", result.size() >= 1);
         assertEquals("format1", result.get(0).getFormatName());
         
-        // 요청이 발생했는지 확인 (캐시 때문에 호출되지 않을 수 있음)
-        // verify(mockHttpClient).execute(any(HttpGet.class));
+        // 요청이 발생했는지 확인
+        verify(mockHttpClient).execute(any(HttpGet.class));
     }
     
     @Test
-    public void testGetLogFormats_WithCache() throws IOException {
-        // Given - 첫 번째 호출 설정
+    public void testGetLogFormats_MultipleCallsWithoutCache() throws IOException {
+        // Given - 캐시 없이 매번 API 호출
         List<LogFormat> expectedFormats = Arrays.asList(
             createLogFormat("format1", "FIREWALL", "CISCO")
         );
@@ -93,13 +86,16 @@ public class LogFormatApiClientTest {
         ApiResponse<List<LogFormat>> apiResponse = new ApiResponse<>(true, "success", expectedFormats);
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
         
-        CloseableHttpResponse mockResponse = createMockResponse(200, jsonResponse);
-        when(mockHttpClient.execute(any(HttpGet.class))).thenReturn(mockResponse);
+        CloseableHttpResponse mockResponse1 = createMockResponse(200, jsonResponse);
+        CloseableHttpResponse mockResponse2 = createMockResponse(200, jsonResponse);
+        when(mockHttpClient.execute(any(HttpGet.class)))
+            .thenReturn(mockResponse1)
+            .thenReturn(mockResponse2);
         
         // When - 첫 번째 호출
         List<LogFormat> result1 = apiClient.getLogFormats();
         
-        // When - 두 번째 호출 (캐시에서 가져와야 함)
+        // When - 두 번째 호출 (캐시 없이 다시 API 호출)
         List<LogFormat> result2 = apiClient.getLogFormats();
         
         // Then
@@ -107,8 +103,8 @@ public class LogFormatApiClientTest {
         assertNotNull(result2);
         assertEquals(result1.size(), result2.size());
         
-        // HTTP 클라이언트는 한 번만 호출되어야 함
-        verify(mockHttpClient, times(1)).execute(any(HttpGet.class));
+        // HTTP 클라이언트는 두 번 호출되어야 함 (캐시가 없으므로)
+        verify(mockHttpClient, times(2)).execute(any(HttpGet.class));
     }
     
     @Test

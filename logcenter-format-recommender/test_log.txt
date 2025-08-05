@@ -1,0 +1,1 @@
+20190402000759 <140>Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.

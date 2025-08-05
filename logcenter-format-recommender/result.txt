@@ -1,0 +1,1079 @@
+2025-08-05 22:29:04.819 [main] DEBUG com.logcenter.recommender.Main - 시스템 구성 완료
+2025-08-05 22:29:04.828 [main] INFO  c.l.recommender.config.ConfigLoader - 클래스패스에서 설정 파일 로드 완료: application.properties
+2025-08-05 22:29:04.834 [main] INFO  c.l.recommender.config.ConfigLoader - AppConfig에 설정 적용 완료
+2025-08-05 22:29:04.835 [main] DEBUG c.l.recommender.config.ConfigLoader - 적용된 설정값:
+2025-08-05 22:29:04.837 [main] DEBUG c.l.recommender.config.ConfigLoader -   matcher.parallel.enabled = true
+2025-08-05 22:29:04.838 [main] DEBUG c.l.recommender.config.ConfigLoader -   format.cache.enabled = true
+2025-08-05 22:29:04.838 [main] DEBUG c.l.recommender.config.ConfigLoader -   grok.patterns.custom.file = custom-grok-patterns
+2025-08-05 22:29:04.846 [main] DEBUG c.l.recommender.config.ConfigLoader -   grok.patterns.cache.enabled = true
+2025-08-05 22:29:04.847 [main] DEBUG c.l.recommender.config.ConfigLoader -   logging.level.com.logcenter = DEBUG
+2025-08-05 22:29:04.848 [main] DEBUG c.l.recommender.config.ConfigLoader -   matcher.min.confidence = 70
+2025-08-05 22:29:04.848 [main] DEBUG c.l.recommender.config.ConfigLoader -   app.version = 1.0.0
+2025-08-05 22:29:04.848 [main] DEBUG c.l.recommender.config.ConfigLoader -   format.cache.ttl.minutes = 60
+2025-08-05 22:29:04.848 [main] DEBUG c.l.recommender.config.ConfigLoader -   performance.match.timeout.seconds = 30
+2025-08-05 22:29:04.848 [main] DEBUG c.l.recommender.config.ConfigLoader -   logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+2025-08-05 22:29:04.849 [main] DEBUG c.l.recommender.config.ConfigLoader -   api.retry.count = 3
+2025-08-05 22:29:04.849 [main] DEBUG c.l.recommender.config.ConfigLoader -   matcher.max.results = 10
+2025-08-05 22:29:04.849 [main] DEBUG c.l.recommender.config.ConfigLoader -   performance.thread.pool.size = 10
+2025-08-05 22:29:04.849 [main] DEBUG c.l.recommender.config.ConfigLoader -   match.timeout.ms = 30000
+2025-08-05 22:29:04.849 [main] DEBUG c.l.recommender.config.ConfigLoader -   grok.patterns.standard.dir = grok-patterns/
+2025-08-05 22:29:04.850 [main] DEBUG c.l.recommender.config.ConfigLoader -   grok.patterns.cache.size = 1000
+2025-08-05 22:29:04.850 [main] DEBUG c.l.recommender.config.ConfigLoader -   format.data.file = setting_logformat.json
+2025-08-05 22:29:04.850 [main] DEBUG c.l.recommender.config.ConfigLoader -   api.timeout.seconds = 30
+2025-08-05 22:29:04.851 [main] DEBUG c.l.recommender.config.ConfigLoader -   api.base.url = http://localhost:8080/api
+2025-08-05 22:29:04.851 [main] DEBUG c.l.recommender.config.ConfigLoader -   app.name = LogCenter Format Recommender
+2025-08-05 22:29:04.851 [main] DEBUG c.l.recommender.config.ConfigLoader -   logging.level.root = INFO
+2025-08-05 22:29:05.021 [main] INFO  c.l.r.grok.GrokCompilerWrapper - 표준 Grok 패턴을 로드했습니다
+2025-08-05 22:29:05.024 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT1 - TEXT
+2025-08-05 22:29:05.024 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT2 - TEXT
+2025-08-05 22:29:05.025 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT3 - TEXT
+2025-08-05 22:29:05.025 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT4 - TEXT
+2025-08-05 22:29:05.026 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT5 - TEXT
+2025-08-05 22:29:05.026 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT6 - TEXT
+2025-08-05 22:29:05.026 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT7 - TEXT
+2025-08-05 22:29:05.026 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT8 - TEXT
+2025-08-05 22:29:05.027 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT9 - TEXT
+2025-08-05 22:29:05.027 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT10 - TEXT
+2025-08-05 22:29:05.028 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT11 - TEXT
+2025-08-05 22:29:05.029 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT12 - TEXT
+2025-08-05 22:29:05.029 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT13 - TEXT
+2025-08-05 22:29:05.030 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT14 - TEXT
+2025-08-05 22:29:05.030 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT15 - TEXT
+2025-08-05 22:29:05.031 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT16 - TEXT
+2025-08-05 22:29:05.031 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT17 - TEXT
+2025-08-05 22:29:05.032 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TEXT18 - TEXT
+2025-08-05 22:29:05.033 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DIGIT - FIELD
+2025-08-05 22:29:05.033 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: KEYWORD1 - FIELD
+2025-08-05 22:29:05.033 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED0 - RESERVED
+2025-08-05 22:29:05.034 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED1 - RESERVED
+2025-08-05 22:29:05.034 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED2 - RESERVED
+2025-08-05 22:29:05.035 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED3 - RESERVED
+2025-08-05 22:29:05.035 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED4 - RESERVED
+2025-08-05 22:29:05.036 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED5 - RESERVED
+2025-08-05 22:29:05.036 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED6 - RESERVED
+2025-08-05 22:29:05.037 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED7 - RESERVED
+2025-08-05 22:29:05.037 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED8 - RESERVED
+2025-08-05 22:29:05.037 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED9 - RESERVED
+2025-08-05 22:29:05.038 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED10 - RESERVED
+2025-08-05 22:29:05.039 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED11 - RESERVED
+2025-08-05 22:29:05.039 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESERVED12 - RESERVED
+2025-08-05 22:29:05.040 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: APP_NAME - FIELD
+2025-08-05 22:29:05.040 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ACTION - FIELD
+2025-08-05 22:29:05.040 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: COMPUTER_NAME - FIELD
+2025-08-05 22:29:05.041 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CONNECT_TYPE - FIELD
+2025-08-05 22:29:05.042 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATA - FIELD
+2025-08-05 22:29:05.043 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATA_TYPE - FIELD
+2025-08-05 22:29:05.043 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DB_NAME - FIELD
+2025-08-05 22:29:05.044 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DEPT_NAME - FIELD
+2025-08-05 22:29:05.044 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DEVICE_NAME - FIELD
+2025-08-05 22:29:05.045 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DFI_CODE - FIELD
+2025-08-05 22:29:05.045 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DFI_NAME - FIELD
+2025-08-05 22:29:05.045 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SYSGRPNM - FIELD
+2025-08-05 22:29:05.046 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DIRECTION - FIELD
+2025-08-05 22:29:05.046 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DURATION - FIELD
+2025-08-05 22:29:05.047 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: EMP_CODE - FIELD
+2025-08-05 22:29:05.047 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: EMP_NAME - FIELD
+2025-08-05 22:29:05.048 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: EMP_TYPE - FIELD
+2025-08-05 22:29:05.048 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: END_TIME - DATE_TIME
+2025-08-05 22:29:05.048 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: EVENT_ID - FIELD
+2025-08-05 22:29:05.048 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: EVENT_NAME - FIELD
+2025-08-05 22:29:05.049 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: FILE_NAME - FIELD
+2025-08-05 22:29:05.049 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: FILE_PATH - FIELD
+2025-08-05 22:29:05.050 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: HOST_ID - FIELD
+2025-08-05 22:29:05.050 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: HOST_NAME - FIELD
+2025-08-05 22:29:05.051 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: INTERFACE - FIELD
+2025-08-05 22:29:05.051 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ISEXTGBN - FIELD
+2025-08-05 22:29:05.052 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ISWORKGBN - FIELD
+2025-08-05 22:29:05.052 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: LEVEL - FIELD
+2025-08-05 22:29:05.053 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: LOG_NAME - FIELD
+2025-08-05 22:29:05.053 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: MESSAGE - FIELD
+2025-08-05 22:29:05.053 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: METHOD - FIELD
+2025-08-05 22:29:05.054 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAME - FIELD
+2025-08-05 22:29:05.054 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: OBJECT_NAME - FIELD
+2025-08-05 22:29:05.054 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: POSITION - FIELD
+2025-08-05 22:29:05.054 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PROTOCOL - FIELD
+2025-08-05 22:29:05.055 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECEIVER2 - FIELD
+2025-08-05 22:29:05.055 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RESULT - FIELD
+2025-08-05 22:29:05.056 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SCENARIO_ID - FIELD
+2025-08-05 22:29:05.056 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SCENARIO_NAME - FIELD
+2025-08-05 22:29:05.056 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SCENARIO_NAME_LOWER - FIELD
+2025-08-05 22:29:05.057 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SESSION_ID - FIELD
+2025-08-05 22:29:05.057 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SM_TYPE - FIELD
+2025-08-05 22:29:05.058 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SOURCE_NAME - FIELD
+2025-08-05 22:29:05.058 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: START_TIME - DATE_TIME
+2025-08-05 22:29:05.059 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: STATUS - FIELD
+2025-08-05 22:29:05.059 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TABLE_NAME - FIELD
+2025-08-05 22:29:05.059 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TERMINAL_NAME - FIELD
+2025-08-05 22:29:05.059 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TITLE - FIELD
+2025-08-05 22:29:05.060 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TMP - FIELD
+2025-08-05 22:29:05.060 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TMP2 - FIELD
+2025-08-05 22:29:05.060 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TMP3 - FIELD
+2025-08-05 22:29:05.060 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TMP4 - FIELD
+2025-08-05 22:29:05.061 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TMP5 - FIELD
+2025-08-05 22:29:05.061 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TYPE - FIELD
+2025-08-05 22:29:05.061 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: UNIT_ID - FIELD
+2025-08-05 22:29:05.062 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: URL - FIELD
+2025-08-05 22:29:05.063 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: USER_ID - FIELD
+2025-08-05 22:29:05.063 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: USER_NAME - FIELD
+2025-08-05 22:29:05.063 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NETWORK - FIELD
+2025-08-05 22:29:05.063 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PROCESSES - FIELD
+2025-08-05 22:29:05.064 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ELASTICSEARCH - FIELD
+2025-08-05 22:29:05.064 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ISWORK - FIELD
+2025-08-05 22:29:05.064 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RULE_ID - FIELD
+2025-08-05 22:29:05.065 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RULE_NAME - FIELD
+2025-08-05 22:29:05.065 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: GROUP_ID - FIELD
+2025-08-05 22:29:05.066 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: GROUP_NAME - FIELD
+2025-08-05 22:29:05.067 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RISK_NAME - FIELD
+2025-08-05 22:29:05.067 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CHANNEL - FIELD
+2025-08-05 22:29:05.067 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TARGET_NAME - FIELD
+2025-08-05 22:29:05.068 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: THRESOLD - FIELD
+2025-08-05 22:29:05.068 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: USED - FIELD
+2025-08-05 22:29:05.068 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAT_RULE_ID - FIELD
+2025-08-05 22:29:05.069 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: TCP_FLAG - FIELD
+2025-08-05 22:29:05.069 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: REASON - FIELD
+2025-08-05 22:29:05.070 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: COMMAND - FIELD
+2025-08-05 22:29:05.071 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SERVICE - FIELD
+2025-08-05 22:29:05.071 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ATTACK_ID - FIELD
+2025-08-05 22:29:05.071 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: COUNT - NUMBER
+2025-08-05 22:29:05.072 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: FACILITYNO - FIELD
+2025-08-05 22:29:05.072 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: FILE_SIZE - NUMBER
+2025-08-05 22:29:05.072 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: LEVELNO - FIELD
+2025-08-05 22:29:05.073 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PID - NUMBER
+2025-08-05 22:29:05.073 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PRI - FIELD
+2025-08-05 22:29:05.073 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECORD_NUMBER - FIELD
+2025-08-05 22:29:05.073 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECV_PKT - NUMBER
+2025-08-05 22:29:05.074 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECV_SIZE - NUMBER
+2025-08-05 22:29:05.074 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SENT_PKT - NUMBER
+2025-08-05 22:29:05.074 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SENT_SIZE - NUMBER
+2025-08-05 22:29:05.074 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DISK - FIELD
+2025-08-05 22:29:05.075 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CPU - FIELD
+2025-08-05 22:29:05.075 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: MEM - FIELD
+2025-08-05 22:29:05.075 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: LOAD - FIELD
+2025-08-05 22:29:05.075 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PACKET_SIZE - NUMBER
+2025-08-05 22:29:05.075 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: PACKET_CNT - FIELD
+2025-08-05 22:29:05.076 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SESSION_COUNT - NUMBER
+2025-08-05 22:29:05.076 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECV_FRAME - FIELD
+2025-08-05 22:29:05.077 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SENT_FRAME - FIELD
+2025-08-05 22:29:05.077 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_PKT - NUMBER
+2025-08-05 22:29:05.078 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_PKT - NUMBER
+2025-08-05 22:29:05.079 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_SIZE - NUMBER
+2025-08-05 22:29:05.079 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_SIZE - NUMBER
+2025-08-05 22:29:05.079 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_TCP_PKT - NUMBER
+2025-08-05 22:29:05.079 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_UDP_PKT - NUMBER
+2025-08-05 22:29:05.080 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_ICMP_PKT - NUMBER
+2025-08-05 22:29:05.080 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_ETC_PKT - NUMBER
+2025-08-05 22:29:05.080 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_TCP_PKT - NUMBER
+2025-08-05 22:29:05.080 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_UDP_PKT - NUMBER
+2025-08-05 22:29:05.081 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_ICMP_PKT - NUMBER
+2025-08-05 22:29:05.081 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DENY_ETC_PKT - NUMBER
+2025-08-05 22:29:05.081 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ALLOW_SESSION - FIELD
+2025-08-05 22:29:05.082 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: BLOCK_SESSION - FIELD
+2025-08-05 22:29:05.082 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SRC_IP - IP
+2025-08-05 22:29:05.082 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DST_IP - IP
+2025-08-05 22:29:05.082 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: HOST_IP - IP
+2025-08-05 22:29:05.083 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAT_SRC_IP - IP
+2025-08-05 22:29:05.083 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAT_DST_IP - IP
+2025-08-05 22:29:05.083 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DEVICE_IP - IP
+2025-08-05 22:29:05.083 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SRC_MAC - MAC
+2025-08-05 22:29:05.084 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DST_MAC - MAC
+2025-08-05 22:29:05.084 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SRC_PORT - PORT
+2025-08-05 22:29:05.084 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DST_PORT - PORT
+2025-08-05 22:29:05.084 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAT_SRC_PORT - PORT
+2025-08-05 22:29:05.085 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NAT_DST_PORT - PORT
+2025-08-05 22:29:05.085 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: LOG_TIME - DATE_TIME
+2025-08-05 22:29:05.085 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT1 - DATE_TIME
+2025-08-05 22:29:05.085 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT2 - DATE_TIME
+2025-08-05 22:29:05.086 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT3 - DATE_TIME
+2025-08-05 22:29:05.086 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT4 - DATE_TIME
+2025-08-05 22:29:05.086 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT5 - DATE_TIME
+2025-08-05 22:29:05.086 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT6 - DATE_TIME
+2025-08-05 22:29:05.087 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT7 - DATE_TIME
+2025-08-05 22:29:05.087 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT8 - DATE_TIME
+2025-08-05 22:29:05.087 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT9 - DATE_TIME
+2025-08-05 22:29:05.088 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT10 - DATE_TIME
+2025-08-05 22:29:05.088 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: DATE_FORMAT18 - DATE_TIME
+2025-08-05 22:29:05.088 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: MAIL - EMAIL
+2025-08-05 22:29:05.089 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: RECEIVER - EMAIL
+2025-08-05 22:29:05.089 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SENDER - EMAIL
+2025-08-05 22:29:05.090 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SKIP - IP
+2025-08-05 22:29:05.090 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SKIP_AHN - IP
+2025-08-05 22:29:05.091 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SKIP_CSV - IP
+2025-08-05 22:29:05.091 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SKIP_SPACE - IP
+2025-08-05 22:29:05.091 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: SPACE - FIELD
+2025-08-05 22:29:05.092 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: BATCH - FIELD
+2025-08-05 22:29:05.093 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NUMBER - FIELD
+2025-08-05 22:29:05.093 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: WORD - FIELD
+2025-08-05 22:29:05.093 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: BATCH_MULTILINE - FIELD
+2025-08-05 22:29:05.093 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: QUERY - FIELD
+2025-08-05 22:29:05.094 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: ELASTIC_INDEX - FIELD
+2025-08-05 22:29:05.094 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: GREEDYMULTILINE - FIELD
+2025-08-05 22:29:05.094 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NOPIPEGREEDYDATA - IP
+2025-08-05 22:29:05.094 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: THREAD_NAME - FIELD
+2025-08-05 22:29:05.095 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: NOTSPACE - FIELD
+2025-08-05 22:29:05.095 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO1 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.095 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO2 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.095 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO3 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.096 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO4 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.096 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO5 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.096 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO6 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.096 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO7 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.096 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO8 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.097 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO9 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.097 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO10 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.097 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO11 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.098 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO12 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.098 [main] DEBUG c.l.r.grok.CustomPatternLoader - 커스텀 패턴 로드: CISCO13 - VENDOR_SPECIFIC
+2025-08-05 22:29:05.098 [main] INFO  c.l.r.grok.CustomPatternLoader - 199개의 커스텀 Grok 패턴을 로드했습니다
+2025-08-05 22:29:05.158 [main] INFO  c.l.r.grok.GrokCompilerWrapper - 199개의 커스텀 Grok 패턴을 로드했습니다
+2025-08-05 22:29:05.516 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_CENTOS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.517 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TMAXSOFT_JEUS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.517 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TMAXSOFT_WEBTOB_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.517 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: APACHE_HTTP_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.518 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TREND_MICRO_TIPPINGPOINT_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.518 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_IPS_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.518 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: JUNIPER_NETWORKS_NETSCREEN_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.518 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: NEXG_SECUREWORKS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.519 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CHECKPOINT_NGFW_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.520 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MF2_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.521 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: FORTINET_FG600C_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.521 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AHNLAB_TRUSGUARD_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.521 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: HP_UX_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.521 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: IBM_AIX_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.522 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: ORACLE_SOLARIS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.523 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CISCO_ASA_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.523 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PIOLINK_WEBFRONT_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.523 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_WAF_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.524 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: 3COM_H3C_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.524 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: EXTREME_NETWORKS_BLACKDIAMOND_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.524 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: JUNIPER_NETWORKS_SWITCH_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.524 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: NORTEL_ALTEON_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.525 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PIOLINK_SWITCH_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.526 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MONITORAPP_AIWAF_2.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.527 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MONITORAPP_AIWAF_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.527 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MONITORAPP_AIWAF_3.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.527 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PENTASECURITY_WAPPLE_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.528 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TRINITYSOFT_WEBS_RAY_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.528 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MFD_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.530 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: RADWARE_DEFENSEPRO_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.531 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SSL_VPN_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.532 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MFI_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.532 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MFI_2.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.533 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: FIREEYE_MPS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.533 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SYMANTEC_SEP_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.533 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TRENDMICRO_DEEP_DISCOVERY_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.534 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: GENIAN_NAC_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.534 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: NETMAN_SMART_NAC_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.534 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_BLUEMAX_NGF_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.534 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: NEXG_VPN_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.536 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CISCO_SWITCH_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.536 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AHNLAB_DPX_5000B_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.537 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AHNLAB_TRUSGUARD_2.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.537 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: JUNIPER_NETWORKS_NETSCREEN_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.537 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PALOALTONETWORKS_PALOALTO_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.538 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PALOALTONETWORKS_PALOALTO_3.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.538 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_BLUEMAX_NGF_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.538 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MF2_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.539 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MF2_2.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.539 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MF2_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.539 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_NXG_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.540 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_IPS_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.540 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_IPS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.540 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_CENTOS_2.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.540 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_CENTOS_3.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.541 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PENTASECURITY_WAPPLE_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.542 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PENTASECURITY_WAPPLE_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.542 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_WAF_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.543 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AUDITBEAT_PROCESS_START_1.00, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.543 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: JUNIPER_NETWORKS_SRX_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.543 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_AUDITD_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.544 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: ICINGA_ICINGA_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.544 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: NGINX_NGINX_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.544 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: TRAEFIK_TRAEFIK_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.545 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MONGODB_MONGODB_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.545 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: POSTGRESQL_POSTGRESQL_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.546 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: RABBITMQ_RABBITMQ_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.546 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: REDIS_REDIS_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.546 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MYSQL_MYSQL_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.547 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MSSQL_MSSQL_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.547 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: ELASTICSEARCH_ELASTICSEARCH_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.547 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: ACTIVEMQ_ACTIVEMQ_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.548 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LOGSTASH_LOGSTASH_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.549 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: ZOOKEEPER_ZOOKEEPER_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.549 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SYSTEM_SYSTEM_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.550 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MSSQL_MSSQL_2.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.550 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: HAPROXY_HAPROXY_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.550 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AXGATE_AXGATE_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.551 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_BLUEMAX_NGF_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.551 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CISCO_FIREPOWER_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.551 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: HILLSTONE_NETWORKS_NGFW_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.552 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: F5_AWAF_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.552 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PENTASECURITY_WAPPLE_3.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.552 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_DHCP_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.553 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_BLUEMAX_NGF_3.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.553 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PALOALTONETWORKS_PALOALTO_2.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.553 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_BLUEMAX_NGF_2.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.553 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_IPS_3.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.554 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUWAY_SSL_U_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.554 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PIOLINK_WEBFRONT_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.554 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: PENTASECURITY_WAPPLE_4.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.555 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MFI_1.00_CSV_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.556 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: SECUI_MFD_2.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.557 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AXGATE_AXGATE_80D_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.557 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: WINS_SNIPER_ONE_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.557 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: MICROSOFT_M365_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.558 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: LINUX_COMMAND_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.558 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: JUNIPER_NETWORKS_SRX_300_1.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.558 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CISCO_SWITCH_2.00_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.559 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: CHECKPOINT_QUANTUM_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.560 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: AXGATE_AXGATE_2300S_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.560 [main] DEBUG c.l.r.grok.FilePatternRepository - 패턴 이름: EZMES_BZRULE_1.00_WELF_1, Grok 표현식 null 여부: false
+2025-08-05 22:29:05.563 [main] INFO  c.l.r.grok.FilePatternRepository - 102개의 로그 포맷을 로드했습니다
+2025-08-05 22:29:05.564 [main] INFO  c.l.r.grok.FilePatternRepository - 그룹: 12개, 벤더: 52개
+2025-08-05 22:29:05.565 [main] INFO  c.l.r.s.LogFormatRecommenderImpl - 로그 포맷 추천 서비스 초기화 완료
+2025-08-05 22:29:05.566 [main] INFO  c.l.recommender.cli.CliCommand - 로컬 서비스 초기화 완료
+2025-08-05 22:29:05.567 [main] INFO  c.l.recommender.cli.CliCommand - 텍스트 로그 분석 시작
+2025-08-05 22:29:05.593 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ELASTICSEARCH_ELASTICSEARCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.597 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LOGSTASH_LOGSTASH_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.599 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.593 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 GENIAN_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.602 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LOGSTASH_LOGSTASH_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.593 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ORACLE_SOLARIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.599 [pool-1-thread-12] INFO  c.l.r.grok.PatternNormalizer - 중복 그룹 이름 변경: index_name -> index_name_1
+2025-08-05 22:29:05.593 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.598 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.598 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.600 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.602 [pool-1-thread-13] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.602 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.602 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LOGSTASH_LOGSTASH_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.603 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.604 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.606 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ACTIVEMQ_ACTIVEMQ_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.607 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.607 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 APACHE_HTTP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.611 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ELASTICSEARCH_ELASTICSEARCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.611 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.612 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ORACLE_SOLARIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.613 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.613 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.626 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ACTIVEMQ_ACTIVEMQ_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.614 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: GENIAN_NAC, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.616 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.616 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.617 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.618 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MSSQL_MSSQL_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.620 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.623 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ELASTICSEARCH_ELASTICSEARCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.631 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 GENIAN_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.624 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 APACHE_HTTP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.625 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.625 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.626 [pool-1-thread-14] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.629 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.629 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.629 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MSSQL_MSSQL_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.629 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ACTIVEMQ_ACTIVEMQ_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ORACLE_SOLARIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.642 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.643 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.632 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.634 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 APACHE_HTTP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.634 [pool-1-thread-10] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.636 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.644 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.646 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.636 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.636 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: CISCO_SWITCH, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.638 [pool-1-thread-5] INFO  c.l.r.grok.PatternNormalizer - 중복 그룹 이름 변경: type -> type_1
+2025-08-05 22:29:05.639 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUWAY_SSL_U_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.639 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HP_UX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.648 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.640 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.649 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUWAY_SSL_U_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.641 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.642 [pool-1-thread-2] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.644 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: WINS_SNIPER_IPS, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.644 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.645 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.646 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.647 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.653 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.647 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.647 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.648 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.648 [pool-1-thread-6] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.656 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: HP_UX, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.649 [pool-1-thread-9] INFO  c.l.r.grok.PatternNormalizer - 중복 그룹 이름 변경: log_time -> log_time_1
+2025-08-05 22:29:05.656 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HP_UX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.649 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.657 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.657 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.650 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.650 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUWAY_SSL_U_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.650 [pool-1-thread-15] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.651 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: ORACLE_SOLARIS, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.651 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.653 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.653 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.655 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.656 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_FIREPOWER_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.656 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.656 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.657 [pool-1-thread-5] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.657 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EZMES_BZRULE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.659 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.659 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUWAY_SSL_U_1.00_CSV: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.659 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: JUNIPER_NETWORKS_SWITCH, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.659 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ORACLE_SOLARIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.659 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.665 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.661 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.667 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.660 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.662 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.662 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.663 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.664 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.664 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_FIREPOWER_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.664 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: MONITORAPP_AIWAF, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.664 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.664 [pool-1-thread-6] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴과 일치함: ^%{DATA:message}$
+2025-08-05 22:29:05.665 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.665 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, event_name, log_time]
+2025-08-05 22:29:05.667 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.668 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.668 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.669 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.674 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 3COM_H3C_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.670 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.670 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.670 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.670 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.671 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.672 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: EZMES_BZRULE, 패턴: ^%{DATA:message}$
+2025-08-05 22:29:05.672 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.672 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_FIREPOWER_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.672 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.677 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_FIREPOWER_1.00: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.673 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.678 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.673 [pool-1-thread-15] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): ^%{LOG_TIME:log_time} <%{PRI:pri}>%{DATE_FORMAT3} %{EVENT_NAME:event_name}\[%{EVENT_ID:event_id}\]: %{DATE_FORMAT4}.%{SKIP_NUMBER} %{MESSAGE:message} %{SRC_IP:src_ip},%{SRC_PORT:src_port} %{SKIP} %{DST_IP:dst_ip},%{DST_PORT:dst_port} %{TMP:tmp}$ - IllegalArgumentException - No definition for key 'SKIP_NUMBER' found, aborting
+2025-08-05 22:29:05.674 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUWAY_SSL_U_1.00_CSV: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.674 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.674 [pool-1-thread-10] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.675 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.676 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 3COM_H3C_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.676 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.676 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.676 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EZMES_BZRULE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 REDIS_REDIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.677 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.678 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.678 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.678 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.678 [pool-1-thread-16] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.678 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.679 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.685 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.679 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: PIOLINK_SWITCH, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.679 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FIREEYE_MPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {pri=140, action=IPSEC, message= Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.687 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 3COM_H3C_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 REDIS_REDIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.690 [pool-1-thread-9] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.691 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 REDIS_REDIS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.682 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONGODB_MONGODB_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.683 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.683 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.683 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 필터링 후 캡처 결과 - {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.684 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: CHECKPOINT_NGFW, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.685 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.693 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_NGFW_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.694 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_1.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.694 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.694 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.686 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.686 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HAPROXY_HAPROXY_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.686 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_SWITCH_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.687 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, action, message, log_time]
+2025-08-05 22:29:05.688 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FIREEYE_MPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.697 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HAPROXY_HAPROXY_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.688 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.689 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.691 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: 3COM_H3C, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.691 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONGODB_MONGODB_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.692 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.701 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NORTEL_ALTEON_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.702 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SSL_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.692 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.692 [pool-1-thread-12] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{DIGIT:pri}\>[^\:]*[^\s]*[^\:]*[\W]*%{RESERVED15:event_name}[^\:]*\:[^\:]*\:[^\:]*\:[^\:]*[^\d]*%{TEXT1:src_ip}[^\:]*\:\s[\W]*[^\:]*[\W]*%{KEYWORD1:rule_name}[^\:]*\:\s%{TEXT1:device_name}[^\d]*%{TEXT8:dst_ip}\:%{TEXT1:dst_port}[^\:]*[\W]*%{KEYWORD1:type}[^\d]*%{TEXT1:risk}[^\:]*[\W]*[^\:]*[\W]*%{TEXT1:vhost_name}[\W]*[^\d]*%{TEXT1:status}[^\:]*[\W]*%{TEXT14:reason}[\W]*%{TEXT13:message}$ - IllegalArgumentException - No definition for key 'RESERVED15' found, aborting
+2025-08-05 22:29:05.704 [pool-1-thread-12] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{DIGIT:pri}>[^\:]*[^\s]*[^\:]*[\W]*%{TEXT1:event_name}[^\:]*\:\s\"[^\\]*\\[^\\]*\\n[^\s]*\s%{TEXT19:message}[^\r\n]*$ - IllegalArgumentException - No definition for key 'TEXT19' found, aborting
+2025-08-05 22:29:05.694 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.705 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.695 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.696 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.697 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, action=IPSEC, message= Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.698 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TMAXSOFT_JEUS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.698 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.698 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HAPROXY_HAPROXY_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.699 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FIREEYE_MPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.699 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 3COM_H3C_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.700 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.702 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NORTEL_ALTEON_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.702 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SSL_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.703 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_FIREPOWER_1.00: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.711 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NORTEL_ALTEON_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.705 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_3.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.705 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_1.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.712 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NORTEL_ALTEON_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.706 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.706 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.707 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, action=IPSEC, message= Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.708 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.708 [pool-1-thread-10] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^\[%{DATE_FORMAT1:log_time}\] %{MESSAGE:message}$
+2025-08-05 22:29:05.708 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.714 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.708 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HAPROXY_HAPROXY_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.709 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FIREEYE_MPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.710 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.711 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.711 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.711 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SSL_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.712 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.712 [pool-1-thread-5] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.713 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.713 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 필터링 후 캡처 결과 - {pri=140, action=IPSEC, message= Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.713 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.714 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.714 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.714 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: TMAXSOFT_JEUS, 패턴: ^\[%{DATE_FORMAT1:log_time}\] %{MESSAGE:message}$
+2025-08-05 22:29:05.714 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.715 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.715 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.715 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.716 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FIREEYE_MPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.716 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.716 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TMAXSOFT_WEBTOB_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.717 [pool-1-thread-6] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.717 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.717 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: NORTEL_ALTEON, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.717 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.718 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.718 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.719 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TMAXSOFT_JEUS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.719 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.719 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.720 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.737 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.720 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.720 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.720 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.721 [pool-1-thread-15] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.721 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TMAXSOFT_WEBTOB_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.722 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.722 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SSL_VPN, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.722 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.722 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NORTEL_ALTEON_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.735 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.736 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.736 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.737 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.742 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.737 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.743 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.738 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.738 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.738 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.744 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.738 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: FIREEYE_MPS, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.739 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TMAXSOFT_WEBTOB_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.739 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.739 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.746 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.739 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SSL_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.739 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.740 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_3.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.741 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.742 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_1.00: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.743 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.743 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NETMAN_SMART_NAC_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.743 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_DHCP_1.00: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.743 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.744 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RADWARE_DEFENSEPRO_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.744 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.744 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.745 [pool-1-thread-15] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): ^%{LOG_TIME:log_time} <%{PRI:pri}>%{DATE_FORMAT3} %{EVENT_NAME:event_name}\[%{EVENT_ID:event_id}\]: %{DATE_FORMAT4}.%{SKIP_NUMBER} %{MESSAGE:message} %{SRC_IP:src_ip},%{SRC_PORT:src_port} %{SKIP} %{DST_IP:dst_ip},%{DST_PORT:dst_port} %{TMP:tmp}$ - IllegalArgumentException - No definition for key 'SKIP_NUMBER' found, aborting
+2025-08-05 22:29:05.746 [pool-1-thread-4] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): ^%{LOG_TIME:log_time} <%{PRI:pri}>%{DATE_FORMAT3} %{EVENT_NAME:event_name}\[%{EVENT_ID:event_id}\]: %{DATE_FORMAT4}.%{SKIP_NUMBER} %{MESSAGE:message} %{SRC_IP:src_ip},%{SRC_PORT:src_port} %{SKIP} %{DST_IP:dst_ip},%{DST_PORT:dst_port} %{TMP:tmp}$ - IllegalArgumentException - No definition for key 'SKIP_NUMBER' found, aborting
+2025-08-05 22:29:05.747 [pool-1-thread-3] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.747 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.748 [pool-1-thread-2] INFO  c.l.r.grok.PatternNormalizer - 중복 그룹 이름 변경: type -> type_1
+2025-08-05 22:29:05.754 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.748 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.749 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 F5_AWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.750 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 IBM_AIX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.750 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.751 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_WAF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.751 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.751 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.753 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RADWARE_DEFENSEPRO_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.753 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {pri=140, event_name=IPSEC, message=Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.753 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.758 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RADWARE_DEFENSEPRO_1.00: 원본 캡처 결과 - {device_name=Apr 30 2013 09:23:02, pri=140, SKIP=[%ASA-3-402117:, IPSEC:], type=Received, message=a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.754 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SECUI_MF2, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.754 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRINITYSOFT_WEBS_RAY_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.754 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.754 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.755 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.755 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.755 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_SRX_300_1.00: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.756 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 F5_AWAF_1.00: 원본 캡처 결과 - {severity=09:23:02:, pri=140, service=%ASA-3-402117, message=IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10, log_time=20190402000759}
+2025-08-05 22:29:05.756 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 IBM_AIX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.756 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.757 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_WAF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.757 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.758 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.758 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, event_name, message, log_time]
+2025-08-05 22:29:05.758 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [device_name, pri, type, message, log_time]
+2025-08-05 22:29:05.763 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.759 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.759 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.759 [pool-1-thread-4] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.759 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.760 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.765 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.760 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.761 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [severity, pri, service, message, log_time]
+2025-08-05 22:29:05.761 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.766 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.762 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MYSQL_MYSQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.762 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_DPX_5000B_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.762 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 IBM_AIX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.767 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MYSQL_MYSQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.762 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_WAF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.768 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 IBM_AIX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.762 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.763 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, event_name=IPSEC, message=Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.763 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {device_name=Apr 30 2013 09:23:02, pri=140, SKIP=[%ASA-3-402117:, IPSEC:], type=Received, message=a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.763 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.764 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: TRINITYSOFT_WEBS_RAY, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.765 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.765 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.766 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {severity=09:23:02:, pri=140, service=%ASA-3-402117, message=IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10, log_time=20190402000759}
+2025-08-05 22:29:05.766 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.766 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.766 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.767 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.768 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MYSQL_MYSQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.768 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_4.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.768 [pool-1-thread-12] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.768 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RABBITMQ_RABBITMQ_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.769 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, event_name=IPSEC, message=Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.769 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.769 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시되지 않은 필드 필터링: SKIP = [%ASA-3-402117:, IPSEC:]
+2025-08-05 22:29:05.769 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.769 [pool-1-thread-4] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): ^%{LOG_TIME:log_time} <%{PRI:pri}>%{DATE_FORMAT3} %{EVENT_NAME:event_name}\[%{EVENT_ID:event_id}\]: %{DATE_FORMAT4}.%{SKIP_NUMBER} %{MESSAGE:message} %{SRC_IP:src_ip},%{SRC_PORT:src_port} %{SKIP} %{DST_IP:dst_ip},%{DST_PORT:dst_port} %{TMP:tmp}$ - IllegalArgumentException - No definition for key 'SKIP_NUMBER' found, aborting
+2025-08-05 22:29:05.775 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.771 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.771 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {severity=09:23:02:, pri=140, service=%ASA-3-402117, message=IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10, log_time=20190402000759}
+2025-08-05 22:29:05.772 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.772 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.772 [pool-1-thread-2] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.772 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.777 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.773 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.773 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: %{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\s%{DATA:method}\sfor\s(invalid user )?%{DATA:user_name}\sfrom\s%{DATA:src_ip}\sport\s%{DATA:src_port}\s%{BATCH:message}?
+2025-08-05 22:29:05.774 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: IBM_AIX, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.774 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_4.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.774 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RABBITMQ_RABBITMQ_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.774 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 필터링 후 캡처 결과 - {pri=140, event_name=IPSEC, message=Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.775 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {device_name=Apr 30 2013 09:23:02, pri=140, type=Received, message=a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.775 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.775 [pool-1-thread-10] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.776 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TREND_MICRO_TIPPINGPOINT_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.776 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 F5_AWAF_1.00: 필터링 후 캡처 결과 - {severity=09:23:02:, pri=140, service=%ASA-3-402117, message=IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10, log_time=20190402000759}
+2025-08-05 22:29:05.780 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.776 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.777 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: MONITORAPP_AIWAF, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.777 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.781 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.778 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.778 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.778 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.778 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: %{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\s%{DATA:method}\sfor\s(invalid user )?%{DATA:user_name}\sfrom\s%{DATA:src_ip}\sport\s%{DATA:src_port}\s%{BATCH:message}?
+2025-08-05 22:29:05.778 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 IBM_AIX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.778 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_4.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.779 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 RADWARE_DEFENSEPRO_1.00: 필터링 후 캡처 결과 - {device_name=Apr 30 2013 09:23:02, pri=140, type=Received, message=a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.779 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ZOOKEEPER_ZOOKEEPER_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.784 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.779 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SECUI_MFD, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.780 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.785 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.786 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.780 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TREND_MICRO_TIPPINGPOINT_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.780 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.781 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.781 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 F5_AWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.782 [pool-1-thread-9] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.782 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.782 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.782 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.782 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s*%{DATA:user_name}\s:(\s%{DATA:error}\s;)?\sTTY=%{DATA:tty}\s;\sPWD=%{DATA:pwd}\s;\sUSER=%{DATA:user_id}\s;\sCOMMAND=%{BATCH:command}$
+2025-08-05 22:29:05.782 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.783 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_4.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.784 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ZOOKEEPER_ZOOKEEPER_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.785 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.786 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.787 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.788 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TREND_MICRO_TIPPINGPOINT_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.788 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.788 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.788 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 F5_AWAF_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.789 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: PIOLINK_WEBFRONT, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.789 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_NXG_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.790 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.790 [pool-1-thread-1] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.790 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.795 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_NXG_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.790 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s*%{DATA:user_name}\s:(\s%{DATA:error}\s;)?\sTTY=%{DATA:tty}\s;\sPWD=%{DATA:pwd}\s;\sUSER=%{DATA:user_id}\s;\sCOMMAND=%{BATCH:command}$
+2025-08-05 22:29:05.791 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.791 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.791 [pool-1-thread-12] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.791 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_COMMAND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.791 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.798 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_COMMAND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.792 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.792 [pool-1-thread-4] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.794 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.799 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.794 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.794 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.794 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 POSTGRESQL_POSTGRESQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.795 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: CISCO_SWITCH, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.795 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.796 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.796 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_NXG_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.796 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\snew group:\sname=%{DATA:group_name},\sGID=%{NUMBER:group_id}$
+2025-08-05 22:29:05.797 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.797 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.797 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: NEXG_VPN, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.798 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_COMMAND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.798 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: TREND_MICRO_TIPPINGPOINT, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.799 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_3.00: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.799 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.799 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFD_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.805 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.800 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.800 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 POSTGRESQL_POSTGRESQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_SWITCH_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-14] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.807 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.801 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_NXG_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.802 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\snew group:\sname=%{DATA:group_name},\sGID=%{NUMBER:group_id}$
+2025-08-05 22:29:05.803 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.803 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.803 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_VPN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.809 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s<%{TEXT17:pri}>[^\[]*\[(?<log_name>fw4_deny)]*\s[^\,]*,[^\,]*,[^\,]*,%{TEXT4:device_name},%{TEXT4:rule_id},%{TEXT4:rule_name},%{TEXT4:nat_rule_id},%{TEXT4:nat_rule_name},%{TEXT4:src_ip},%{TEXT4:user_id},%{TEXT4:src_port},%{TEXT4:dst_ip},%{TEXT4:dst_port},%{TEXT4:protocol},%{TEXT4:app_name},%{TEXT4:app_protocol},%{TEXT4:app_category},%{TEXT4:app_saas},%{TEXT4:zone_in},%{TEXT4:inter_in},%{TEXT4:recv_pkt},%{TEXT4:sent_pkt},%{TEXT4:recv_byte},%{TEXT4:send_byte},%{TEXT4:packets_total},%{TEXT4:bytes_total},%{TEXT4:fragment_info},%{TEXT4:tcp_plag},%{TEXT4:reason},%{TEXT4:is_ssl},%{TEXT4:is_sslvpn},%{TEXT4:instance_id},%{TEXT4:src_country},%{TEXT4:dst_country}$ - PatternSyntaxException - Unclosed character class near index 693
+(?<name0>([^\s]*))\s<(?<name1>([^\>]*))>[^\[]*\\[fw4_deny\]\s[^\,]*,[^\,]*,[^\,]*,(?<name2>([^\,]*)),(?<name3>([^\,]*)),(?<name4>([^\,]*)),(?<name5>([^\,]*)),(?<name6>([^\,]*)),(?<name7>([^\,]*)),(?<name8>([^\,]*)),(?<name9>([^\,]*)),(?<name10>([^\,]*)),(?<name11>([^\,]*)),(?<name12>([^\,]*)),(?<name13>([^\,]*)),(?<name14>([^\,]*)),(?<name15>([^\,]*)),(?<name16>([^\,]*)),(?<name17>([^\,]*)),(?<name18>([^\,]*)),(?<name19>([^\,]*)),(?<name20>([^\,]*)),(?<name21>([^\,]*)),(?<name22>([^\,]*)),(?<name23>([^\,]*)),(?<name24>([^\,]*)),(?<name25>([^\,]*)),(?<name26>([^\,]*)),(?<name27>([^\,]*)),(?<name28>([^\,]*)),(?<name29>([^\,]*)),(?<name30>([^\,]*)),(?<name31>([^\,]*)),(?<name32>([^\,]*))$
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+2025-08-05 22:29:05.804 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TREND_MICRO_TIPPINGPOINT_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.804 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.806 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.806 [pool-1-thread-8] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.806 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.807 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRAEFIK_TRAEFIK_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.807 [pool-1-thread-1] DEBUG c.l.recommender.filter.PatternFilter - 패턴의 필드 수가 너무 적음: ^.* (필드 수: 0)
+2025-08-05 22:29:05.812 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.807 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: FORTINET_FG600C, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.807 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.807 [pool-1-thread-9] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.808 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\snew\suser:\sname=%{DATA:user_name},\sUID=%{NUMBER:user_id},\sGID=%{NUMBER:group_id},\shome=%{DATA:home},\sshell=%{DATA:shell}$
+2025-08-05 22:29:05.809 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.809 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_4.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.809 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_2300S_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.815 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_2300S_1.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.809 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_AUDITD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.810 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{TEXT17:pri}\>[^\[]*\[(?<log_name>if_traffic_cnt)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:interface}\,%{TEXT4:status}\,%{TEXT4:recv_pkt}\,%{TEXT4:sent_pkt}\,%{TEXT4:recv_size}\,%{TEXT4:sent_size}$ - PatternSyntaxException - Unclosed character class near index 213
+(?<name0>([^\s]*))\s\<(?<name1>([^\>]*))\>[^\[]*\\[if_traffic_cnt\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))\,(?<name7>([^\,]*))\,(?<name8>([^\,]*))$
+                                                                                                                                                                                                                     ^
+2025-08-05 22:29:05.811 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.811 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.817 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{DIGIT:pri}\>[^\[]*\[(?<log_name>fw[46]_traffic_cnt)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:type}\,%{TEXT4:allow_pkt}\,%{TEXT4:deny_pkt}\,%{TEXT4:allow_bytes}\,%{TEXT4:deny_bytes},%{TEXT4:accumulate_session},%{TEXT4:peak_session}$ - PatternSyntaxException - Unclosed character class near index 234
+(?<name0>([^\s]*))\s\<(?<name1>([\d]*))\>[^\[]*\\[fw[46]_traffic_cnt\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))\,(?<name7>([^\,]*)),(?<name8>([^\,]*)),(?<name9>([^\,]*))$
+                                                                                                                                                                                                                                          ^
+2025-08-05 22:29:05.817 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.817 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.818 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.818 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.811 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: TRENDMICRO_DEEP_DISCOVERY, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.812 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_WAF_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.812 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRAEFIK_TRAEFIK_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.812 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: AUDITBEAT_PROCESS_START_1.00, 패턴: ^.*
+2025-08-05 22:29:05.812 [pool-1-thread-5] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.813 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 FORTINET_FG600C_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.814 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: MONITORAPP_AIWAF, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.814 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.814 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\snew\suser:\sname=%{DATA:user_name},\sUID=%{NUMBER:user_id},\sGID=%{NUMBER:group_id},\shome=%{DATA:home},\sshell=%{DATA:shell}$
+2025-08-05 22:29:05.821 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\suser\s%{DATA:user_name}\sfrom\s%{TEXT1:src_ip}$
+2025-08-05 22:29:05.814 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.815 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.816 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_AUDITD_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.817 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{TEXT17:pri}\>[^\[]*\[(?<log_name>fw4_traffic_rule_cnt)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:rule_id}\,%{TEXT4:rule_name}\,%{TEXT4:action}\,%{TEXT4:packet_cnt}\,%{TEXT4:packet_size}\,%{TEXT4:accumulate_session}\,%{TEXT4:peak_session}$ - PatternSyntaxException - Unclosed character class near index 239
+(?<name0>([^\s]*))\s\<(?<name1>([^\>]*))\>[^\[]*\\[fw4_traffic_rule_cnt\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))\,(?<name7>([^\,]*))\,(?<name8>([^\,]*))\,(?<name9>([^\,]*))$
+                                                                                                                                                                                                                                               ^
+2025-08-05 22:29:05.818 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ICINGA_ICINGA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.823 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.818 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_3.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.819 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.819 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 TRENDMICRO_DEEP_DISCOVERY_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.819 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_WAF_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.820 [pool-1-thread-1] DEBUG c.l.recommender.filter.PatternFilter - 패턴의 필드 수가 너무 적음: ^.* (필드 수: 0)
+2025-08-05 22:29:05.820 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: AHNLAB_TRUSGUARD, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.827 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.820 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.820 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MONITORAPP_AIWAF_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.821 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.821 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\suser\s%{DATA:user_name}\sfrom\s%{TEXT1:src_ip}$
+2025-08-05 22:29:05.821 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.821 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_ONE_1.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.822 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.829 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.830 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_2300S_1.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.823 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{TEXT17:pri}\>[^\[]*\[(?<log_name>daemon_cnt)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:processes}\,%{TEXT4:cpu}\,%{TEXT4:tmp}\,%{TEXT4:mem}$ - PatternSyntaxException - Unclosed character class near index 169
+(?<name0>([^\s]*))\s\<(?<name1>([^\>]*))\>[^\[]*\\[daemon_cnt\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))$
+                                                                                                                                                                         ^
+2025-08-05 22:29:05.824 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 ICINGA_ICINGA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.824 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.825 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MSSQL_MSSQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.826 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: AUDITBEAT_PROCESS_START_1.00, 패턴: ^.*
+2025-08-05 22:29:05.827 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_3.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.827 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.827 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AHNLAB_TRUSGUARD_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.827 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.828 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{BATCH:message}$
+2025-08-05 22:29:05.828 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SYMANTEC_SEP_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.828 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.828 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.836 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SYMANTEC_SEP_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.829 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.831 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{TEXT17:pri}\>[^\[]*\[(?<log_name>sslvpn_monitoring)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:tunnel_total}\,%{TEXT4:sent_bps}\,%{TEXT4:recv_bps}\,%{TEXT4:send_bytes}\,%{TEXT4:recv_bytes}\,%{TEXT4:tunnel_cnt}$ - PatternSyntaxException - Unclosed character class near index 216
+(?<name0>([^\s]*))\s\<(?<name1>([^\>]*))\>[^\[]*\\[sslvpn_monitoring\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))\,(?<name7>([^\,]*))\,(?<name8>([^\,]*))$
+                                                                                                                                                                                                                        ^
+2025-08-05 22:29:05.831 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.831 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EXTREME_NETWORKS_BLACKDIAMOND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.832 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.839 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EXTREME_NETWORKS_BLACKDIAMOND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.832 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HILLSTONE_NETWORKS_NGFW_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.832 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MSSQL_MSSQL_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.833 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.833 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_3.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.835 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: ^%{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{BATCH:message}$
+2025-08-05 22:29:05.835 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.841 [pool-1-thread-11] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: %{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\s%{DATA:method}\sfor\s(invalid user )?%{DATA:user_name}\sfrom\s%{DATA:src_ip}\sport\s%{DATA:src_port}\s%{BATCH:message}?
+2025-08-05 22:29:05.841 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYSTEM_SYSTEM, 패턴: %{DATE_FORMAT10:log_time}\s%{DATA:host_name}\s%{DATA:processes}(?:\[%{DATA:pid}\])?:\s%{DATA:event_name}\s%{DATA:method}\sfor\s(invalid user )?%{DATA:user_name}\sfrom\s%{DATA:src_ip}\sport\s%{DATA:src_port}\s%{BATCH:message}?
+2025-08-05 22:29:05.842 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.835 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.836 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.836 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.838 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.838 [pool-1-thread-16] DEBUG c.l.r.grok.GrokCompilerWrapper - Grok 표현식 컴파일 실패 (기타): %{TEXT1:log_time}\s\<%{TEXT17:pri}\>[^\[]*\[(?<log_name>resource_cnt)][^\,]*\,%{TEXT4:device_name}\,%{TEXT4:cpu}\,%{TEXT4:mem}\,%{TEXT4:disk}\,%{TEXT4:cpu_cnt}\,%{TEXT4:cpu_per}$ - PatternSyntaxException - Unclosed character class near index 191
+(?<name0>([^\s]*))\s\<(?<name1>([^\>]*))\>[^\[]*\\[resource_cnt\][^\,]*\,(?<name2>([^\,]*))\,(?<name3>([^\,]*))\,(?<name4>([^\,]*))\,(?<name5>([^\,]*))\,(?<name6>([^\,]*))\,(?<name7>([^\,]*))$
+                                                                                                                                                                                               ^
+2025-08-05 22:29:05.844 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.838 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.839 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SYMANTEC_SEP_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.839 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EXTREME_NETWORKS_BLACKDIAMOND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.840 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.840 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.841 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_3.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.841 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.843 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.848 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PALOALTONETWORKS_PALOALTO_3.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.848 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.849 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.843 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.843 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.844 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.844 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.844 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_1.00_CSV: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.845 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.845 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.846 [pool-1-thread-13] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.846 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SYMANTEC_SEP_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.847 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.848 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MF2_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.850 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MICROSOFT_M365_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.850 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.850 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 WINS_SNIPER_IPS_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.851 [pool-1-thread-14] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.855 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.851 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.852 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.852 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.852 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.852 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.852 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: EXTREME_NETWORKS_BLACKDIAMOND, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.858 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 원본 캡처 결과 - {pri=140, SKIP= , message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.853 [pool-1-thread-9] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.853 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.854 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.855 [pool-1-thread-8] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴과 일치함: ^%{DATA:message}$
+2025-08-05 22:29:05.860 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: MICROSOFT_M365, 패턴: ^%{DATA:message}$
+2025-08-05 22:29:05.860 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 MICROSOFT_M365_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.855 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HILLSTONE_NETWORKS_NGFW_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.855 [pool-1-thread-7] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_2.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.855 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SECUI_MFI, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.855 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.856 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.856 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.857 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.862 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.857 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.858 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.858 [pool-1-thread-13] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 EXTREME_NETWORKS_BLACKDIAMOND_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.858 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:05.858 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: SYMANTEC_SEP, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.859 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.864 [pool-1-thread-4] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CHECKPOINT_QUANTUM_1.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.860 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.861 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NGINX_NGINX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.861 [pool-1-thread-14] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.865 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.862 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.862 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HILLSTONE_NETWORKS_NGFW_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.862 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.862 [pool-1-thread-6] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.863 [pool-1-thread-16] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_BLUEMAX_NGF_1.00_CSV: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.863 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.863 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.864 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, SKIP= , message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.864 [pool-1-thread-9] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SYMANTEC_SEP_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.865 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NGINX_NGINX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.866 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.866 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.866 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HILLSTONE_NETWORKS_NGFW_1.00_CSV: 원본 캡처 결과 - {messages=<140>Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.867 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: PENTASECURITY_WAPPLE, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.867 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.868 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.868 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.868 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 빈 값 필터링: SKIP =  
+2025-08-05 22:29:05.869 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NGINX_NGINX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.869 [pool-1-thread-5] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.869 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.870 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [messages, log_time]
+2025-08-05 22:29:05.870 [pool-1-thread-6] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PENTASECURITY_WAPPLE_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.870 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.871 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.871 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.871 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.872 [pool-1-thread-8] DEBUG c.l.recommender.filter.PatternFilter - MESSAGE/GREEDYDATA가 주요 필드임: ^%{DATA:log_time}[\s]\[%{DATA:level}\][\s]%{PID:pid}#(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))):[\s](\*(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))))[\s])?%{BATCH:message}$
+2025-08-05 22:29:05.872 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: NEXG_SECUREWORKS, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.872 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.872 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {messages=<140>Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.873 [pool-1-thread-12] DEBUG c.l.recommender.filter.PatternFilter - 패턴이 일반적인 패턴 목록에 포함됨: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.873 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.873 [pool-1-thread-2] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 PIOLINK_WEBFRONT_2.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.874 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.874 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: NGINX_NGINX, 패턴: ^%{DATA:log_time}[\s]\[%{DATA:level}\][\s]%{PID:pid}#(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))):[\s](\*(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))))[\s])?%{BATCH:message}$
+2025-08-05 22:29:05.875 [pool-1-thread-5] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NEXG_SECUREWORKS_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.875 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.875 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {messages=<140>Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.875 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 너무 일반적인 패턴 건너뛰기 - 포맷: JUNIPER_NETWORKS_NETSCREEN, 패턴: ^%{LOG_TIME:log_time} %{MESSAGE:message}$
+2025-08-05 22:29:05.875 [pool-1-thread-10] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 SECUI_MFI_1.00_CSV: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.877 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.877 [pool-1-thread-8] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 NGINX_NGINX_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.878 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.878 [pool-1-thread-15] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 HILLSTONE_NETWORKS_NGFW_1.00_CSV: 필터링 후 캡처 결과 - {messages=<140>Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:05.878 [pool-1-thread-12] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 JUNIPER_NETWORKS_NETSCREEN_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.879 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.879 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.881 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.881 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:05.881 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, event_name, log_time]
+2025-08-05 22:29:05.882 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.882 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 원본 캡처 결과 - {src_ip=10.5.1.127, protocol=ICMP, pri=140, SKIP=[Apr 30 2013 09:23:02: %ASA-3-, IPSEC], action=Received a non-IPSec packet, log_time=20190402000759, dst_ip=192.168.6.102}
+2025-08-05 22:29:05.882 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.882 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [src_ip, protocol, pri, action, log_time, dst_ip]
+2025-08-05 22:29:05.882 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 필터링 후 캡처 결과 - {pri=140, event_name=IPSEC, log_time=20190402000759}
+2025-08-05 22:29:05.883 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {src_ip=10.5.1.127, protocol=ICMP, pri=140, SKIP=[Apr 30 2013 09:23:02: %ASA-3-, IPSEC], action=Received a non-IPSec packet, log_time=20190402000759, dst_ip=192.168.6.102}
+2025-08-05 22:29:05.883 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시되지 않은 필드 필터링: SKIP = [Apr 30 2013 09:23:02: %ASA-3-, IPSEC]
+2025-08-05 22:29:05.884 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {src_ip=10.5.1.127, protocol=ICMP, pri=140, action=Received a non-IPSec packet, log_time=20190402000759, dst_ip=192.168.6.102}
+2025-08-05 22:29:05.884 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {pri=140, log_time=20190402000759}
+2025-08-05 22:29:05.884 [pool-1-thread-3] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 CISCO_ASA_1.00: 필터링 후 캡처 결과 - {src_ip=10.5.1.127, protocol=ICMP, pri=140, action=Received a non-IPSec packet, log_time=20190402000759, dst_ip=192.168.6.102}
+2025-08-05 22:29:05.884 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, log_time]
+2025-08-05 22:29:05.884 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, log_time=20190402000759}
+2025-08-05 22:29:05.885 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, log_time=20190402000759}
+2025-08-05 22:29:05.885 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 필터링 후 캡처 결과 - {pri=140, log_time=20190402000759}
+2025-08-05 22:29:05.887 [pool-1-thread-11] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 LINUX_CENTOS_2.00: 원본 캡처 결과 - {}
+2025-08-05 22:29:19.219 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_80D_1.00_WELF: 원본 캡처 결과 - {}
+2025-08-05 22:29:19.220 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_80D_1.00_WELF: 원본 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:19.221 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 명시적으로 지정된 필드명: [pri, message, log_time]
+2025-08-05 22:29:19.221 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 전 캡처된 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:19.221 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 필터링 후 필드: {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+2025-08-05 22:29:19.222 [pool-1-thread-1] DEBUG c.l.r.matcher.AdvancedLogMatcher - 로그 포맷 AXGATE_AXGATE_80D_1.00_WELF: 필터링 후 캡처 결과 - {pri=140, message=Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102., log_time=20190402000759}
+
+=== 로그 포맷 추천 결과 ===
+
+1. JUNIPER_NETWORKS_SRX_300_1.00 (신뢰도: 98.0%)
+   - 포맷명: JUNIPER_NETWORKS_SRX_300
+   - 그룹: VPN
+   - 벤더: JUNIPER_NETWORKS
+   - 매칭된 필드:
+     * pri: 140
+     * message: Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.
+     * log_time: 20190402000759
+   - 완전 매칭: 예
+   - 부분 매칭: 아니오
+
+2. AXGATE_AXGATE_1.00_WELF (신뢰도: 98.0%)
+   - 포맷명: AXGATE_AXGATE
+   - 그룹: Firewall
+   - 벤더: AXGATE
+   - 매칭된 필드:
+     * pri: 140
+     * message: Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.
+     * log_time: 20190402000759
+   - 완전 매칭: 예
+   - 부분 매칭: 아니오
+
+3. SECUWAY_SSL_U_1.00_CSV (신뢰도: 98.0%)
+   - 포맷명: SECUWAY_SSL_U
+   - 그룹: VPN
+   - 벤더: SECUWAY
+   - 매칭된 필드:
+     * pri: 140
+     * message: Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.
+     * log_time: 20190402000759
+   - 완전 매칭: 예
+   - 부분 매칭: 아니오
+
+4. CISCO_FIREPOWER_1.00 (신뢰도: 98.0%)
+   - 포맷명: CISCO_FIREPOWER
+   - 그룹: Firewall
+   - 벤더: CISCO
+   - 매칭된 필드:
+     * pri: 140
+     * message: Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.
+     * log_time: 20190402000759
+   - 완전 매칭: 예
+   - 부분 매칭: 아니오
+
+5. PENTASECURITY_WAPPLE_3.00_WELF (신뢰도: 98.0%)
+   - 포맷명: PENTASECURITY_WAPPLE
+   - 그룹: Web Firewall
+   - 벤더: PENTASECURITY
+   - 매칭된 필드:
+     * pri: 140
+     * message: Apr 30 2013 09:23:02: %ASA-3-402117: IPSEC: Received a non-IPSec packet (protocol= ICMP) from 10.5.1.127 to 192.168.6.102.
+     * log_time: 20190402000759
+   - 완전 매칭: 예
+   - 부분 매칭: 아니오
+

@@ -1,7 +1,6 @@
 package com.logcenter.recommender.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.logcenter.recommender.api.cache.CacheManager;
 import com.logcenter.recommender.api.model.ApiResponse;
 import com.logcenter.recommender.api.model.LogFormatRequest;
 import com.logcenter.recommender.model.FormatRecommendation;
@@ -38,7 +37,6 @@ public class LogFormatApiClient implements AutoCloseable {
     private final String baseUrl;
     private final String apiKey;
     private final CloseableHttpClient httpClient;
-    private final CacheManager cacheManager;
     
     // 타임아웃 설정 (밀리초)
     private static final int CONNECTION_TIMEOUT = 5000;
@@ -57,7 +55,6 @@ public class LogFormatApiClient implements AutoCloseable {
     public LogFormatApiClient(String baseUrl, String apiKey) {
         this.baseUrl = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
         this.apiKey = apiKey;
-        this.cacheManager = CacheManager.getInstance();
         
         // HTTP 클라이언트 설정
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
@@ -82,23 +79,12 @@ public class LogFormatApiClient implements AutoCloseable {
      * 로그 포맷 목록 조회
      */
     public List<LogFormat> getLogFormats() throws IOException {
-        String cacheKey = "all_formats";
-        
-        // 캐시 확인
-        List<LogFormat> cached = cacheManager.get("logFormats", cacheKey);
-        if (cached != null) {
-            logger.debug("캐시에서 로그 포맷 목록 반환");
-            return cached;
-        }
-        
         // API 호출
         String url = baseUrl + "/api/v1/logformats";
         ApiResponse<List<LogFormat>> response = executeGetRequest(url, 
                 new TypeReference<ApiResponse<List<LogFormat>>>() {});
         
         if (response.isSuccess() && response.getData() != null) {
-            // 캐시 저장
-            cacheManager.put("logFormats", cacheKey, response.getData());
             return response.getData();
         }
         
@@ -109,23 +95,12 @@ public class LogFormatApiClient implements AutoCloseable {
      * 특정 그룹의 로그 포맷 조회
      */
     public List<LogFormat> getLogFormatsByGroup(String group) throws IOException {
-        String cacheKey = "formats_group_" + group;
-        
-        // 캐시 확인
-        List<LogFormat> cached = cacheManager.get("logFormats", cacheKey);
-        if (cached != null) {
-            logger.debug("캐시에서 그룹별 로그 포맷 반환: {}", group);
-            return cached;
-        }
-        
         // API 호출
         String url = baseUrl + "/api/v1/logformats?group=" + group;
         ApiResponse<List<LogFormat>> response = executeGetRequest(url,
                 new TypeReference<ApiResponse<List<LogFormat>>>() {});
         
         if (response.isSuccess() && response.getData() != null) {
-            // 캐시 저장
-            cacheManager.put("logFormats", cacheKey, response.getData());
             return response.getData();
         }
         
@@ -136,24 +111,12 @@ public class LogFormatApiClient implements AutoCloseable {
      * 로그 포맷 추천 요청
      */
     public List<FormatRecommendation> recommendFormats(LogFormatRequest request) throws IOException {
-        // 캐시 키 생성
-        String cacheKey = generateCacheKey(request);
-        
-        // 캐시 확인
-        List<FormatRecommendation> cached = cacheManager.get("recommendations", cacheKey);
-        if (cached != null) {
-            logger.debug("캐시에서 추천 결과 반환");
-            return cached;
-        }
-        
         // API 호출
         String url = baseUrl + "/api/v1/recommend";
         ApiResponse<List<FormatRecommendation>> response = executePostRequest(url, request,
                 new TypeReference<ApiResponse<List<FormatRecommendation>>>() {});
         
         if (response.isSuccess() && response.getData() != null) {
-            // 캐시 저장
-            cacheManager.put("recommendations", cacheKey, response.getData());
             return response.getData();
         }
         
@@ -264,30 +227,6 @@ public class LogFormatApiClient implements AutoCloseable {
     }
     
     /**
-     * 캐시 키 생성
-     */
-    private String generateCacheKey(LogFormatRequest request) {
-        StringBuilder key = new StringBuilder();
-        
-        if (request.getLogSamples() != null && !request.getLogSamples().isEmpty()) {
-            // 첫 번째 로그 샘플의 해시값 사용
-            key.append(request.getLogSamples().get(0).hashCode());
-        }
-        
-        if (request.getGroupFilter() != null) {
-            key.append("_g:").append(request.getGroupFilter());
-        }
-        
-        if (request.getVendorFilter() != null) {
-            key.append("_v:").append(request.getVendorFilter());
-        }
-        
-        key.append("_t:").append(request.getTopN());
-        
-        return key.toString();
-    }
-    
-    /**
      * 연결 상태 확인
      */
     public boolean isHealthy() {
@@ -308,15 +247,6 @@ public class LogFormatApiClient implements AutoCloseable {
             logger.error("헬스 체크 실패", e);
             return false;
         }
-    }
-    
-    /**
-     * 캐시 초기화
-     */
-    public void clearCache() {
-        cacheManager.clearCache("logFormats");
-        cacheManager.clearCache("recommendations");
-        logger.info("API 클라이언트 캐시 초기화");
     }
     
     /**
