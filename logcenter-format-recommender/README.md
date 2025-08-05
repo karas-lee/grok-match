@@ -228,60 +228,89 @@ PatternFilter 클래스를 통해 너무 일반적인 패턴을 자동으로 거
 
 ## 신뢰도 계산 방식
 
-본 시스템은 다음과 같은 알고리즘으로 로그 포맷의 신뢰도를 계산합니다:
+본 시스템은 다음과 같은 개선된 알고리즘으로 로그 포맷의 신뢰도를 계산합니다:
 
 ### 기본 신뢰도 계산
 
-1. **완전 매칭 (Complete Match)**: 98%
+1. **단일 완전 매칭 (Single Complete Match)**: 98%
    - Grok 패턴이 로그 전체를 완벽하게 매칭
-   - 모든 필수 필드가 추출됨
+   - 하나의 포맷만 매칭되는 경우
 
-2. **부분 매칭 (Partial Match)**: 최대 70%
+2. **다중 완전 매칭 (Multiple Complete Match)**: 90-98%
+   - 여러 포맷이 동시에 매칭되는 경우
+   - 필드 수와 구체성에 따라 차등 적용
+
+3. **부분 매칭 (Partial Match)**: 최대 70%
    - 일부만 매칭되는 경우
    - 신뢰도 = matchScore × 70%
 
-3. **매칭 실패**: 0%
+4. **매칭 실패**: 0%
 
 ### 매칭 점수 (Match Score) 계산
 
 매칭 점수는 다음 요소들의 가중 평균으로 계산됩니다:
 
 ```
-matchScore = (fieldScore × 0.4) + (coverageScore × 0.3) + 
-             (validationScore × 0.2) + (requiredFieldScore × 0.1)
+matchScore = (fieldScore × 0.4) + (specificFieldScore × 0.2) + 
+             (coverageScore × 0.2) + (validationScore × 0.1) + 
+             (requiredFieldScore × 0.1)
 ```
 
-#### 1. 필드 점수 (Field Score) - 40%
-- 추출된 필드 수 / 예상 필드 수
+#### 1. 필드 점수 (Field Score) - 40% ⬆️
+- 추출된 필드 수에 따른 점수
 - 많은 필드를 추출할수록 높은 점수
+- 기존 30%에서 40%로 가중치 증가
 
-#### 2. 커버리지 점수 (Coverage Score) - 30%
+#### 2. 구체적 필드 점수 (Specific Field Score) - 20% 🆕
+- 새로 추가된 평가 요소
+- 구체적인 필드(src_ip, dst_ip, protocol 등)의 존재 여부
+- 일반적인 필드(message, data)보다 높은 점수
+
+#### 3. 커버리지 점수 (Coverage Score) - 20% ⬇️
 - 매칭된 텍스트 길이 / 전체 로그 길이
-- 로그의 더 많은 부분을 매칭할수록 높은 점수
+- 기존 30%에서 20%로 가중치 감소
 
-#### 3. 검증 점수 (Validation Score) - 20%
+#### 4. 검증 점수 (Validation Score) - 10% ⬇️
 - 필드 타입 검증 (IP, 포트, 타임스탬프 등)
-- 유효한 값이 추출될수록 높은 점수
+- 기존 20%에서 10%로 가중치 감소
 
-#### 4. 필수 필드 점수 (Required Field Score) - 10%
+#### 5. 필수 필드 점수 (Required Field Score) - 10%
 - 필수 필드 추출 비율
-- 모든 필수 필드가 추출되면 100%
+- 변경 없음
+
+### 완전 매칭 기준 강화
+
+#### 최소 필드 수 요구사항
+- 기본: 3개 초과 필드 필요
+- 예외: 구체적인 필드가 2개 이상인 경우 허용
+
+#### 구체적인 필드 목록
+```
+- 네트워크: src_ip, dst_ip, src_port, dst_port
+- 보안: protocol, action, rule_id, attack_id
+- 시스템: user_id, session_id, event_id
+- 방향: src, dst, source, destination
+```
 
 ### 그룹 가중치
 
 특정 로그 그룹은 추가 가중치를 받습니다:
 
 - **FIREWALL**: 1.2x
-- **WEBSERVER**: 1.1x
-- **OS**: 1.1x
-- **APPLICATION**: 1.05x
+- **IPS**: 1.2x
+- **WAF**: 1.1x
+- **WEBSERVER**: 1.0x
+- **SYSTEM**: 0.9x
+- **APPLICATION**: 0.8x
 - 기타: 1.0x
 
-### 다중 매칭 조정
+### 다중 매칭 차등 신뢰도
 
 여러 포맷이 동시에 완전 매칭될 경우:
-- 신뢰도를 95-97% 범위로 조정
-- 더 구체적인 패턴을 우선시
+- 기본 신뢰도: 90%
+- 필드 수 가산점: 최대 5점 (필드 수 × 0.5)
+- 구체적 필드 가산점: 최대 3점 (구체적 필드 수 × 1.0)
+- 최대 신뢰도: 98%
 
 ### 예시
 
