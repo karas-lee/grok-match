@@ -256,4 +256,25 @@ public class GrokCompilerWrapper {
         
         return stats;
     }
+    
+    /**
+     * Protected getter for subclasses
+     */
+    protected GrokCompiler getCompiler() {
+        return compiler;
+    }
+    
+    /**
+     * Protected getter for subclasses
+     */
+    protected Map<String, GrokPattern> getCustomPatterns() {
+        return customPatterns;
+    }
+    
+    /**
+     * Protected setter for subclasses
+     */
+    protected void setCustomPatternsLoaded(boolean loaded) {
+        this.customPatternsLoaded = loaded;
+    }
 }

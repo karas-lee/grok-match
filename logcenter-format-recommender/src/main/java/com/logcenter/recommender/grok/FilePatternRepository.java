@@ -21,6 +21,7 @@ public class FilePatternRepository implements PatternRepository {
     
     private static final Logger logger = LoggerFactory.getLogger(FilePatternRepository.class);
     
+    private final List<LogFormat> logFormats;
     private final Map<String, LogFormat> formatsById;
     private final Map<String, List<LogFormat>> formatsByGroup;
     private final Map<String, List<LogFormat>> formatsByVendor;
@@ -40,6 +41,7 @@ public class FilePatternRepository implements PatternRepository {
      */
     public FilePatternRepository(String resourcePath) {
         this.resourcePath = resourcePath;
+        this.logFormats = new ArrayList<>();
         this.formatsById = new ConcurrentHashMap<>();
         this.formatsByGroup = new ConcurrentHashMap<>();
         this.formatsByVendor = new ConcurrentHashMap<>();
@@ -73,6 +75,9 @@ public class FilePatternRepository implements PatternRepository {
             
             // 인덱싱
             for (LogFormat format : formats) {
+                // 리스트에 추가
+                logFormats.add(format);
+                
                 // ID별 인덱싱
                 formatsById.put(format.getFormatId(), format);
                 
@@ -212,6 +217,7 @@ public class FilePatternRepository implements PatternRepository {
     
     @Override
     public void clear() {
+        logFormats.clear();
         formatsById.clear();
         formatsByGroup.clear();
         formatsByVendor.clear();
@@ -255,5 +261,41 @@ public class FilePatternRepository implements PatternRepository {
      */
     public Set<String> getAllVendors() {
         return new HashSet<>(formatsByVendor.keySet());
+    }
+    
+    /**
+     * Protected setter for subclasses
+     * 캐시된 로그 포맷을 설정
+     */
+    protected boolean setLogFormats(List<LogFormat> formats) {
+        if (formats == null || formats.isEmpty()) {
+            return false;
+        }
+        
+        // 기존 데이터 초기화
+        logFormats.clear();
+        formatsByGroup.clear();
+        formatsByVendor.clear();
+        formatsById.clear();
+        
+        // 새 데이터 설정
+        for (LogFormat format : formats) {
+            logFormats.add(format);
+            formatsById.put(format.getFormatId(), format);
+            
+            // 그룹별 분류
+            String group = format.getGroupName();
+            if (group != null && !group.isEmpty()) {
+                formatsByGroup.computeIfAbsent(group, k -> new ArrayList<>()).add(format);
+            }
+            
+            // 벤더별 분류
+            String vendor = format.getVendor();
+            if (vendor != null && !vendor.isEmpty()) {
+                formatsByVendor.computeIfAbsent(vendor, k -> new ArrayList<>()).add(format);
+            }
+        }
+        
+        return true;
     }
 }

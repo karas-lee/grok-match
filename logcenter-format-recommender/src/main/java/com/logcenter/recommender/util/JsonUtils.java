@@ -210,4 +210,11 @@ public class JsonUtils {
                 .setPrettyPrinting()
                 .disableHtmlEscaping();
     }
+    
+    /**
+     * JSON 배열 문자열을 List로 변환 (별칭 메서드)
+     */
+    public static <T> List<T> fromJsonArray(String json, Class<T> elementClass) {
+        return fromJsonToList(json, elementClass);
+    }
 }

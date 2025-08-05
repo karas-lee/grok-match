@@ -475,4 +475,11 @@ public class LogFormatRecommenderImpl implements LogFormatRecommender {
     public Map<String, Integer> getVendorStatistics() {
         return patternRepository.getVendorStatistics();
     }
+    
+    /**
+     * 패턴 저장소 반환 (캐시 관리용)
+     */
+    public PatternRepository getPatternRepository() {
+        return patternRepository;
+    }
 }

@@ -30,6 +30,12 @@ public class AppConfig {
     public static final String OUTPUT_FORMAT = "output.format";
     public static final String CONFIDENCE_THRESHOLD = "confidence.threshold";
     
+    // 영구 캐시 설정 키
+    public static final String PERSISTENT_CACHE_ENABLED = "cache.persistent.enabled";
+    public static final String PERSISTENT_CACHE_DIR = "cache.persistent.dir";
+    public static final String PERSISTENT_CACHE_TTL_DAYS = "cache.persistent.ttl.days";
+    public static final String PERSISTENT_CACHE_CHECKSUM_ENABLED = "cache.persistent.checksum.enabled";
+    
     // 기본값
     private static final Map<String, String> DEFAULT_VALUES = new ConcurrentHashMap<>();
     
@@ -48,6 +54,12 @@ public class AppConfig {
         DEFAULT_VALUES.put(DEBUG_MODE, "false");
         DEFAULT_VALUES.put(OUTPUT_FORMAT, "text");
         DEFAULT_VALUES.put(CONFIDENCE_THRESHOLD, "70.0");
+        
+        // 영구 캐시 기본값
+        DEFAULT_VALUES.put(PERSISTENT_CACHE_ENABLED, "true");
+        DEFAULT_VALUES.put(PERSISTENT_CACHE_DIR, ".logcenter/cache");
+        DEFAULT_VALUES.put(PERSISTENT_CACHE_TTL_DAYS, "7");
+        DEFAULT_VALUES.put(PERSISTENT_CACHE_CHECKSUM_ENABLED, "true");
     }
     
     private AppConfig() {

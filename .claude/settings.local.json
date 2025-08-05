@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/.local/maven/bin/mvn:*)",
+      "Bash(wget:*)",
+      "Bash(mkdir:*)",
+      "Bash(tar:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(export JAVA_HOME=$HOME/.local/jdk)",
+      "Bash(export PATH=$JAVA_HOME/bin:$PATH)",
+      "Bash(export M2_HOME=$HOME/.local/maven)",
+      "Bash(export PATH=$M2_HOME/bin:$PATH)",
+      "Bash(source ~/.bashrc)",
+      "Bash(java:*)",
+      "Bash(/home/eric/apache-maven-3.9.9/bin/mvn clean package -DskipTests)",
+      "Bash(/home/eric/.local/bin/mvn clean package -DskipTests)",
+      "Bash(echo $PATH)",
+      "Bash(ls:*)",
+      "Bash(apt-cache:*)",
+      "Bash(find:*)",
+      "Bash(~/apache-maven-3.9.9/bin/mvn clean package -DskipTests)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(cp:*)",
+      "Bash(sed:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(time java:*)"
+    ],
+    "deny": []
+  }
+}

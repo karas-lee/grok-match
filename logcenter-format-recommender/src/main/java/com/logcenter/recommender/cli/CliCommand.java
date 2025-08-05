@@ -2,6 +2,11 @@ package com.logcenter.recommender.cli;
 
 import com.logcenter.recommender.grok.FilePatternRepository;
 import com.logcenter.recommender.grok.GrokCompilerWrapper;
+import com.logcenter.recommender.grok.CachedGrokCompilerWrapper;
+import com.logcenter.recommender.grok.CachedPatternRepository;
+import com.logcenter.recommender.grok.PatternRepository;
+import com.logcenter.recommender.cache.PersistentCacheManager;
+import com.logcenter.recommender.config.AppConfig;
 import com.logcenter.recommender.model.FormatRecommendation;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.service.LogFormatRecommender;
@@ -124,6 +129,30 @@ public class CliCommand implements Callable<Integer> {
     private boolean listVendors;
     
     @Option(
+        names = {"--cache-dir"},
+        description = "캐시 디렉토리 경로"
+    )
+    private String cacheDir;
+    
+    @Option(
+        names = {"--no-cache"},
+        description = "캐시 사용 안 함"
+    )
+    private boolean noCache;
+    
+    @Option(
+        names = {"--clear-cache"},
+        description = "캐시 삭제"
+    )
+    private boolean clearCache;
+    
+    @Option(
+        names = {"--rebuild-cache"},
+        description = "캐시 재구축"
+    )
+    private boolean rebuildCache;
+    
+    @Option(
         names = {"--api"},
         description = "API 서버를 통한 추천 (로컬 대신)"
     )
@@ -149,8 +178,18 @@ public class CliCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
+            // 캐시 명령 처리 (서비스 초기화 전)
+            if (clearCache) {
+                return clearCacheCommand();
+            }
+            
             // 서비스 초기화
             initializeService();
+            
+            // 캐시 재구축 명령
+            if (rebuildCache) {
+                return rebuildCacheCommand();
+            }
             
             // 목록 표시 명령 처리
             if (listFormats) {
@@ -223,15 +262,7 @@ public class CliCommand implements Callable<Integer> {
             logger.info("API 클라이언트 초기화 완료: {}", finalApiUrl);
         } else {
             // 로컬 서비스 초기화
-            FilePatternRepository repository = new FilePatternRepository();
-            GrokCompilerWrapper grokCompiler = new GrokCompilerWrapper();
-            recommender = new LogFormatRecommenderImpl(repository, grokCompiler);
-            
-            if (!recommender.initialize()) {
-                throw new RuntimeException("추천 서비스 초기화 실패");
-            }
-            
-            logger.info("로컬 서비스 초기화 완료");
+            initializeLocalService();
         }
         
         // 출력 포맷터 생성
@@ -467,5 +498,89 @@ public class CliCommand implements Callable<Integer> {
         }
         
         return options;
+    }
+    
+    /**
+     * 로컬 서비스 초기화 (캐시 지원)
+     */
+    private void initializeLocalService() {
+        // 캐시 매니저 초기화
+        PersistentCacheManager cacheManager = null;
+        
+        if (!noCache) {
+            cacheManager = new PersistentCacheManager();
+            
+            // 캐시 디렉토리 설정
+            if (cacheDir != null) {
+                AppConfig.getInstance().setProperty(AppConfig.PERSISTENT_CACHE_DIR, cacheDir);
+            }
+            
+            cacheManager.initialize();
+            logger.info("영구 캐시 활성화: {}", cacheManager.getCacheDir());
+        } else {
+            logger.info("캐시가 비활성화되었습니다 (--no-cache)");
+        }
+        
+        // 캐시 지원 컴포넌트 생성
+        PatternRepository repository;
+        GrokCompilerWrapper grokCompiler;
+        
+        if (cacheManager != null && cacheManager.isEnabled()) {
+            repository = new CachedPatternRepository(cacheManager);
+            grokCompiler = new CachedGrokCompilerWrapper(cacheManager);
+        } else {
+            repository = new FilePatternRepository();
+            grokCompiler = new GrokCompilerWrapper();
+        }
+        
+        // 추천 서비스 생성
+        recommender = new LogFormatRecommenderImpl(repository, grokCompiler);
+        
+        if (!recommender.initialize()) {
+            throw new RuntimeException("추천 서비스 초기화 실패");
+        }
+        
+        logger.info("로컬 서비스 초기화 완료");
+    }
+    
+    /**
+     * 캐시 삭제 명령
+     */
+    private Integer clearCacheCommand() {
+        System.out.println("캐시를 삭제합니다...");
+        
+        PersistentCacheManager cacheManager = new PersistentCacheManager();
+        if (cacheDir != null) {
+            AppConfig.getInstance().setProperty(AppConfig.PERSISTENT_CACHE_DIR, cacheDir);
+        }
+        
+        cacheManager.initialize();
+        cacheManager.invalidate();
+        
+        System.out.println("캐시가 삭제되었습니다.");
+        return 0;
+    }
+    
+    /**
+     * 캐시 재구축 명령
+     */
+    private Integer rebuildCacheCommand() {
+        System.out.println("캐시를 재구축합니다...");
+        
+        // 먼저 캐시 삭제
+        if (recommender instanceof LogFormatRecommenderImpl) {
+            LogFormatRecommenderImpl impl = (LogFormatRecommenderImpl) recommender;
+            PatternRepository repo = impl.getPatternRepository();
+            
+            if (repo instanceof CachedPatternRepository) {
+                ((CachedPatternRepository) repo).invalidateCache();
+            }
+        }
+        
+        // 서비스 재초기화 (캐시 재구축)
+        recommender.reloadFormats();
+        
+        System.out.println("캐시가 재구축되었습니다.");
+        return 0;
     }
 }
