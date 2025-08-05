@@ -18,6 +18,8 @@ public class LogFormat {
     private String model;              // 모델명 (예: HTTP, FG600C)
     private String smType;             // SM 타입 (예: logformat6)
     private List<LogType> logTypes;    // 로그 타입 목록
+    private String grokPattern;        // 대표 Grok 패턴
+    private List<String> requiredFields; // 필수 필드 목록
     
     public LogFormat() {
     }
@@ -93,6 +95,46 @@ public class LogFormat {
     
     public void setLogTypes(List<LogType> logTypes) {
         this.logTypes = logTypes;
+    }
+    
+    public String getGrokPattern() {
+        return grokPattern;
+    }
+    
+    public void setGrokPattern(String grokPattern) {
+        this.grokPattern = grokPattern;
+    }
+    
+    public List<String> getRequiredFields() {
+        return requiredFields;
+    }
+    
+    public void setRequiredFields(List<String> requiredFields) {
+        this.requiredFields = requiredFields;
+    }
+    
+    /**
+     * 그룹명을 반환 (getFormatGroup 별칭)
+     */
+    public String getFormatGroup() {
+        return groupName;
+    }
+    
+    /**
+     * 첫 번째 로그 타입의 첫 번째 패턴을 대표 Grok 패턴으로 반환
+     */
+    public String getPrimaryGrokPattern() {
+        if (grokPattern != null && !grokPattern.isEmpty()) {
+            return grokPattern;
+        }
+        
+        if (logTypes != null && !logTypes.isEmpty()) {
+            LogType firstType = logTypes.get(0);
+            if (firstType.getPatterns() != null && !firstType.getPatterns().isEmpty()) {
+                return firstType.getPatterns().get(0).getGrokExp();
+            }
+        }
+        return null;
     }
     
     @Override
