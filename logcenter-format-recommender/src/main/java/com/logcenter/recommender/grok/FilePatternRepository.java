@@ -69,6 +69,8 @@ public class FilePatternRepository implements PatternRepository {
             
             List<LogFormat> formats = parseFormatsFromFile(inputStream);
             
+            // TODO: 너무 일반적인 패턴만 가진 포맷 필터링 - PatternFilter 구현 후 활성화
+            
             // 인덱싱
             for (LogFormat format : formats) {
                 // ID별 인덱싱

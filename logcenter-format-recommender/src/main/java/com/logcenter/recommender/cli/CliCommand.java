@@ -6,6 +6,9 @@ import com.logcenter.recommender.model.FormatRecommendation;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.service.LogFormatRecommender;
 import com.logcenter.recommender.service.LogFormatRecommenderImpl;
+import com.logcenter.recommender.api.LogFormatApiClient;
+import com.logcenter.recommender.api.model.LogFormatRequest;
+import com.logcenter.recommender.config.ApiConfiguration;
 import picocli.CommandLine.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * CLI 명령어 구현
@@ -118,8 +123,28 @@ public class CliCommand implements Callable<Integer> {
     )
     private boolean listVendors;
     
+    @Option(
+        names = {"--api"},
+        description = "API 서버를 통한 추천 (로컬 대신)"
+    )
+    private boolean useApi;
+    
+    @Option(
+        names = {"--api-url"},
+        description = "API 서버 URL (기본값: 설정 파일)"
+    )
+    private String apiUrl;
+    
+    @Option(
+        names = {"--api-key"},
+        description = "API 인증 키 (기본값: 설정 파일)"
+    )
+    private String apiKey;
+    
     private LogFormatRecommender recommender;
+    private LogFormatApiClient apiClient;
     private OutputFormatter formatter;
+    private ApiConfiguration apiConfig;
     
     @Override
     public Integer call() throws Exception {
@@ -161,6 +186,13 @@ public class CliCommand implements Callable<Integer> {
             if (recommender != null) {
                 recommender.shutdown();
             }
+            if (apiClient != null) {
+                try {
+                    apiClient.close();
+                } catch (Exception e) {
+                    logger.error("API 클라이언트 종료 중 오류", e);
+                }
+            }
         }
     }
     
@@ -168,24 +200,42 @@ public class CliCommand implements Callable<Integer> {
      * 서비스 초기화
      */
     private void initializeService() {
-        // 패턴 저장소 생성
-        FilePatternRepository repository = new FilePatternRepository();
+        // API 설정 로드
+        apiConfig = new ApiConfiguration();
         
-        // Grok 컴파일러 생성
-        GrokCompilerWrapper grokCompiler = new GrokCompilerWrapper();
-        
-        // 추천 서비스 생성
-        recommender = new LogFormatRecommenderImpl(repository, grokCompiler);
-        
-        // 초기화
-        if (!recommender.initialize()) {
-            throw new RuntimeException("추천 서비스 초기화 실패");
+        // API 사용 여부 결정
+        if (useApi || apiConfig.isApiEnabled()) {
+            // API 클라이언트 초기화
+            String finalApiUrl = apiUrl != null ? apiUrl : apiConfig.getApiUrl();
+            String finalApiKey = apiKey != null ? apiKey : apiConfig.getApiKey();
+            
+            if (finalApiUrl == null || finalApiUrl.isEmpty()) {
+                throw new RuntimeException("API URL이 설정되지 않았습니다. --api-url 옵션을 사용하거나 환경변수를 설정하세요.");
+            }
+            
+            apiClient = new LogFormatApiClient(finalApiUrl, finalApiKey);
+            
+            // 연결 확인
+            if (!apiClient.isHealthy()) {
+                throw new RuntimeException("API 서버에 연결할 수 없습니다: " + finalApiUrl);
+            }
+            
+            logger.info("API 클라이언트 초기화 완료: {}", finalApiUrl);
+        } else {
+            // 로컬 서비스 초기화
+            FilePatternRepository repository = new FilePatternRepository();
+            GrokCompilerWrapper grokCompiler = new GrokCompilerWrapper();
+            recommender = new LogFormatRecommenderImpl(repository, grokCompiler);
+            
+            if (!recommender.initialize()) {
+                throw new RuntimeException("추천 서비스 초기화 실패");
+            }
+            
+            logger.info("로컬 서비스 초기화 완료");
         }
         
         // 출력 포맷터 생성
         formatter = new OutputFormatter(outputFormat, showDetail);
-        
-        logger.info("서비스 초기화 완료");
     }
     
     /**
@@ -194,10 +244,30 @@ public class CliCommand implements Callable<Integer> {
     private Integer analyzeText() {
         logger.info("텍스트 로그 분석 시작");
         
-        List<FormatRecommendation> recommendations = recommender.recommend(
-            logInput, 
-            createRecommendOptions()
-        );
+        List<FormatRecommendation> recommendations;
+        
+        if (apiClient != null) {
+            // API를 통한 추천
+            try {
+                LogFormatRequest request = new LogFormatRequest();
+                request.setLogSamples(List.of(logInput));
+                request.setGroupFilter(groupFilter);
+                request.setVendorFilter(vendorFilter);
+                request.setTopN(topN);
+                
+                recommendations = apiClient.recommendFormats(request);
+            } catch (IOException e) {
+                logger.error("API 추천 실패", e);
+                System.err.println("API 추천 실패: " + e.getMessage());
+                return 1;
+            }
+        } else {
+            // 로컬 추천
+            recommendations = recommender.recommend(
+                logInput, 
+                createRecommendOptions()
+            );
+        }
         
         formatter.printRecommendations(recommendations, showStats);
         
@@ -231,10 +301,36 @@ public class CliCommand implements Callable<Integer> {
         }
         
         // 배치 추천
-        List<List<FormatRecommendation>> batchResults = recommender.recommendBatch(
-            logSamples, 
-            createRecommendOptions()
-        );
+        List<List<FormatRecommendation>> batchResults;
+        
+        if (apiClient != null) {
+            // API를 통한 배치 추천
+            batchResults = new ArrayList<>();
+            try {
+                LogFormatRequest request = new LogFormatRequest();
+                request.setLogSamples(logSamples);
+                request.setGroupFilter(groupFilter);
+                request.setVendorFilter(vendorFilter);
+                request.setTopN(topN);
+                
+                // API는 배치를 하나의 요청으로 처리
+                List<FormatRecommendation> recommendations = apiClient.recommendFormats(request);
+                // 각 로그에 대해 동일한 추천 결과 사용
+                for (int i = 0; i < logSamples.size(); i++) {
+                    batchResults.add(recommendations);
+                }
+            } catch (IOException e) {
+                logger.error("API 배치 추천 실패", e);
+                System.err.println("API 배치 추천 실패: " + e.getMessage());
+                return 1;
+            }
+        } else {
+            // 로컬 배치 추천
+            batchResults = recommender.recommendBatch(
+                logSamples, 
+                createRecommendOptions()
+            );
+        }
         
         // 결과 집계 및 출력
         formatter.printBatchResults(batchResults, path.getFileName().toString(), showStats);
@@ -284,7 +380,16 @@ public class CliCommand implements Callable<Integer> {
      */
     private Integer listAllFormats() {
         try {
-            List<LogFormat> formats = recommender.getAvailableFormats();
+            List<LogFormat> formats;
+            
+            if (apiClient != null) {
+                // API에서 포맷 목록 가져오기
+                formats = apiClient.getLogFormats();
+            } else {
+                // 로컬에서 포맷 목록 가져오기
+                formats = recommender.getAvailableFormats();
+            }
+            
             formatter.printFormatList(formats);
             return 0;
         } catch (Exception e) {
@@ -299,7 +404,18 @@ public class CliCommand implements Callable<Integer> {
      */
     private Integer listAllGroups() {
         try {
-            formatter.printGroupStatistics(recommender.getGroupStatistics());
+            if (apiClient != null) {
+                // API 모드에서는 전체 포맷을 가져와서 그룹 통계 생성
+                List<LogFormat> formats = apiClient.getLogFormats();
+                Map<String, Integer> groupStats = new HashMap<>();
+                for (LogFormat format : formats) {
+                    String group = format.getGroup();
+                    groupStats.put(group, groupStats.getOrDefault(group, 0) + 1);
+                }
+                formatter.printGroupStatistics(groupStats);
+            } else {
+                formatter.printGroupStatistics(recommender.getGroupStatistics());
+            }
             return 0;
         } catch (Exception e) {
             logger.error("그룹 목록 출력 중 오류", e);
@@ -313,7 +429,18 @@ public class CliCommand implements Callable<Integer> {
      */
     private Integer listAllVendors() {
         try {
-            formatter.printVendorStatistics(recommender.getVendorStatistics());
+            if (apiClient != null) {
+                // API 모드에서는 전체 포맷을 가져와서 벤더 통계 생성
+                List<LogFormat> formats = apiClient.getLogFormats();
+                Map<String, Integer> vendorStats = new HashMap<>();
+                for (LogFormat format : formats) {
+                    String vendor = format.getVendor();
+                    vendorStats.put(vendor, vendorStats.getOrDefault(vendor, 0) + 1);
+                }
+                formatter.printVendorStatistics(vendorStats);
+            } else {
+                formatter.printVendorStatistics(recommender.getVendorStatistics());
+            }
             return 0;
         } catch (Exception e) {
             logger.error("벤더 목록 출력 중 오류", e);

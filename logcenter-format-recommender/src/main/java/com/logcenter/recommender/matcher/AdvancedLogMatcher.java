@@ -5,6 +5,7 @@ import com.logcenter.recommender.grok.GrokCompilerWrapper;
 import com.logcenter.recommender.grok.validator.*;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.model.MatchResult;
+import com.logcenter.recommender.filter.PatternFilter;
 import io.krakens.grok.api.Grok;
 import io.krakens.grok.api.Match;
 import org.slf4j.Logger;
@@ -135,6 +136,13 @@ public class AdvancedLogMatcher implements LogMatcher {
         String grokPattern = logFormat.getGrokPattern();
         
         if (grokPattern == null || grokPattern.trim().isEmpty()) {
+            return MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
+        }
+        
+        // 너무 일반적인 패턴 필터링
+        if (PatternFilter.isOverlyGeneric(grokPattern)) {
+            logger.debug("너무 일반적인 패턴 건너뛰기 - 포맷: {}, 패턴: {}", 
+                logFormat.getFormatName(), grokPattern);
             return MatchResult.noMatch(logFormat.getFormatId(), logFormat.getFormatName());
         }
         

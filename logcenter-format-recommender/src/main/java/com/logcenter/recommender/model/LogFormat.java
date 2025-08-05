@@ -129,6 +129,13 @@ public class LogFormat {
     }
     
     /**
+     * 그룹명을 반환 (getGroup 별칭)
+     */
+    public String getGroup() {
+        return groupName;
+    }
+    
+    /**
      * 첫 번째 로그 타입의 첫 번째 패턴을 대표 Grok 패턴으로 반환
      */
     public String getPrimaryGrokPattern() {
