@@ -49,10 +49,12 @@ public class LogFormatApiClientTest {
     @Test
     public void testGetLogFormats_Success() throws IOException {
         // Given
-        List<LogFormat> expectedFormats = Arrays.asList(
-            createLogFormat("format1", "FIREWALL", "CISCO"),
-            createLogFormat("format2", "IPS", "FORTINET")
-        );
+        LogFormat format1 = createLogFormat("format1", "FIREWALL", "CISCO");
+        format1.setFormatId("format1");
+        LogFormat format2 = createLogFormat("format2", "IPS", "FORTINET");
+        format2.setFormatId("format2");
+        
+        List<LogFormat> expectedFormats = Arrays.asList(format1, format2);
         
         ApiResponse<List<LogFormat>> apiResponse = new ApiResponse<>(true, "success", expectedFormats);
         String jsonResponse = objectMapper.writeValueAsString(apiResponse);
@@ -138,17 +140,22 @@ public class LogFormatApiClientTest {
         assertEquals("http://localhost:8080/api/v1/recommend", postRequest.getURI().toString());
     }
     
-    @Test(expected = IOException.class)
+    @Test
     public void testRecommendFormats_Unauthorized() throws IOException {
         // Given
         LogFormatRequest request = new LogFormatRequest();
         request.setLogSamples(Arrays.asList("test log"));
         
-        CloseableHttpResponse mockResponse = createMockResponse(401, "Unauthorized");
+        CloseableHttpResponse mockResponse = createMockResponse(401, "{\"success\":false,\"message\":\"Unauthorized\"}");
         when(mockHttpClient.execute(any(HttpPost.class))).thenReturn(mockResponse);
         
         // When/Then - IOException 예상
-        apiClient.recommendFormats(request);
+        try {
+            apiClient.recommendFormats(request);
+            fail("IOException이 발생해야 합니다");
+        } catch (IOException e) {
+            assertTrue(e.getMessage().contains("인증 실패"));
+        }
     }
     
     @Test
@@ -211,18 +218,26 @@ public class LogFormatApiClientTest {
         verify(mockHttpClient, times(3)).execute(any(HttpPost.class));
     }
     
-    @Test(expected = IOException.class)
+    @Test
     public void testRetryLogic_MaxRetriesExceeded() throws IOException {
         // Given
         LogFormatRequest request = new LogFormatRequest();
         request.setLogSamples(Arrays.asList("test log"));
         
         // 모든 시도 실패
-        CloseableHttpResponse failResponse = createMockResponse(500, "Server Error");
+        CloseableHttpResponse failResponse = createMockResponse(500, "{\"success\":false,\"message\":\"Server Error\"}");
         when(mockHttpClient.execute(any(HttpPost.class))).thenReturn(failResponse);
         
         // When/Then - IOException 예상
-        apiClient.recommendFormats(request);
+        try {
+            apiClient.recommendFormats(request);
+            fail("IOException이 발생해야 합니다");
+        } catch (IOException e) {
+            assertTrue(e.getMessage().contains("최대 재시도 횟수 초과"));
+        }
+        
+        // 3번 호출되었는지 확인
+        verify(mockHttpClient, times(3)).execute(any(HttpPost.class));
     }
     
     // Helper methods

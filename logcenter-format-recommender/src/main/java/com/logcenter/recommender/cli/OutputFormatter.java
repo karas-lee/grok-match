@@ -114,15 +114,22 @@ public class OutputFormatter {
             System.out.printf("   - 그룹: %s\n", rec.getGroupName());
             System.out.printf("   - 벤더: %s\n", rec.getVendor());
             
+            // 매칭된 필드는 기본으로 표시
+            if (rec.getMatchedFields() != null && !rec.getMatchedFields().isEmpty()) {
+                System.out.println("   - 매칭된 필드:");
+                rec.getMatchedFields().forEach((key, value) -> {
+                    // 값이 너무 길면 축약
+                    String displayValue = String.valueOf(value);
+                    if (displayValue.length() > 50 && !showDetail) {
+                        displayValue = displayValue.substring(0, 47) + "...";
+                    }
+                    System.out.println("     * " + key + ": " + displayValue);
+                });
+            }
+            
             if (showDetail) {
                 System.out.printf("   - 완전 매칭: %s\n", rec.isCompleteMatch() ? "예" : "아니오");
                 System.out.printf("   - 부분 매칭: %s\n", rec.isPartialMatch() ? "예" : "아니오");
-                
-                if (rec.getMatchedFields() != null && !rec.getMatchedFields().isEmpty()) {
-                    System.out.println("   - 매칭된 필드:");
-                    rec.getMatchedFields().forEach((key, value) -> 
-                        System.out.println("     * " + key + ": " + value));
-                }
                 
                 if (rec.getMissingFields() != null && !rec.getMissingFields().isEmpty()) {
                     System.out.println("   - 누락된 필드:");

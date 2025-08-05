@@ -83,7 +83,7 @@ public class AppConfigTest {
         // 기본값이 설정되어 있는지 확인
         assertEquals("grok-patterns/patterns", config.getString(AppConfig.GROK_PATTERNS_PATH));
         assertEquals("custom-grok-patterns", config.getString(AppConfig.CUSTOM_GROK_PATTERNS_PATH));
-        assertEquals("GROK-PATTERN-CONVERTER.sql", config.getString(AppConfig.LOG_FORMATS_PATH));
+        assertEquals("setting_logformat.json", config.getString(AppConfig.LOG_FORMATS_PATH));
         assertTrue(config.getBoolean(AppConfig.PARALLEL_PROCESSING_ENABLED));
         assertEquals(4, config.getInt(AppConfig.PARALLEL_THREAD_COUNT));
         assertTrue(config.getBoolean(AppConfig.CACHE_ENABLED));

@@ -16,7 +16,7 @@ public class CustomPatternLoaderTest {
         List<GrokPattern> patterns = CustomPatternLoader.loadCustomPatterns("custom-grok-patterns");
         
         assertNotNull(patterns);
-        assertEquals(198, patterns.size()); // 198개의 커스텀 패턴 (주석과 빈 줄 제외)
+        assertEquals(203, patterns.size()); // 203개의 커스텀 패턴 (주석과 빈 줄 제외)
         
         // 카테고리가 설정되었는지 확인
         for (GrokPattern pattern : patterns) {
@@ -45,7 +45,7 @@ public class CustomPatternLoaderTest {
         // TEXT 패턴 개수 확인 (TEXT1-TEXT18)
         List<GrokPattern> textPatterns = grouped.get("TEXT");
         assertNotNull(textPatterns);
-        assertEquals(18, textPatterns.size());
+        assertEquals(19, textPatterns.size());
     }
     
     @Test
