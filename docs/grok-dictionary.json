@@ -1,0 +1,794 @@
+"grok.dictionary": [
+        {
+          "grok_name": "TEXT1",
+          "grok_exp": "([^\\s]*)"
+        },
+        {
+          "grok_name": "TEXT2",
+          "grok_exp": "([^\\]]*)"
+        },
+        {
+          "grok_name": "TEXT3",
+          "grok_exp": "([\\w]*)"
+        },
+        {
+          "grok_name": "TEXT4",
+          "grok_exp": "([^\\,]*)"
+        },
+        {
+          "grok_name": "TEXT5",
+          "grok_exp": "([^\\`]*)"
+        },
+        {
+          "grok_name": "TEXT6",
+          "grok_exp": "([^\\|]*)"
+        },
+        {
+          "grok_name": "TEXT7",
+          "grok_exp": "([^\\)]*)"
+        },
+        {
+          "grok_name": "TEXT8",
+          "grok_exp": "([^\\:]*)"
+        },
+        {
+          "grok_name": "TEXT9",
+          "grok_exp": "([^\\/]*)"
+        },
+        {
+          "grok_name": "TEXT10",
+          "grok_exp": "([^\\-]*)"
+        },
+        {
+          "grok_name": "TEXT11",
+          "grok_exp": "([^\\[]*)"
+        },
+        {
+          "grok_name": "TEXT12",
+          "grok_exp": "([^\\\"]*)"
+        },
+        {
+          "grok_name": "TEXT13",
+          "grok_exp": "([^\\r\\n]*)"
+        },
+        {
+          "grok_name": "DIGIT",
+          "grok_exp": "([\\d]*)"
+        },
+        {
+          "grok_name": "KEYWORD1",
+          "grok_exp": "([^\\s]*\\s[^\\s]*)"
+        },
+        {
+          "grok_name": "RESERVED0",
+          "grok_exp": "(su|login)"
+        },
+        {
+          "grok_name": "RESERVED1",
+          "grok_exp": "(useradd)"
+        },
+        {
+          "grok_name": "RESERVED2",
+          "grok_exp": "(new user)"
+        },
+        {
+          "grok_name": "RESERVED3",
+          "grok_exp": "(userdel)"
+        },
+        {
+          "grok_name": "RESERVED4",
+          "grok_exp": "(delete user)"
+        },
+        {
+          "grok_name": "RESERVED5",
+          "grok_exp": "(passwd)"
+        },
+        {
+          "grok_name": "RESERVED6",
+          "grok_exp": "(icmp)"
+        },
+        {
+          "grok_name": "RESERVED7",
+          "grok_exp": "(LOG_ADMITTED)"
+        },
+        {
+          "grok_name": "RESERVED8",
+          "grok_exp": "(LOG_DENIED)"
+        },
+        {
+          "grok_name": "RESERVED9",
+          "grok_exp": "(fw4_allow|fw4_deny)"
+        },
+        {
+          "grok_name": "RESERVED10",
+          "grok_exp": "(1020|1021)"
+        },
+        {
+          "grok_name": "RESERVED11",
+          "grok_exp": "(TRAFFIC)"
+        },
+        {
+          "grok_name": "RESERVED12",
+          "grok_exp": "(\\s0x0\\s|\\s)"
+        },
+        {
+          "grok_name": "APP_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ACTION",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "COMPUTER_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "CONNECT_TYPE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "COUNT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DATA",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DATA_TYPE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DB_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DEPT_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DEVICE_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DFI_CODE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DFI_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SYSGRPNM",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DIRECTION",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DST_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "DST_MAC",
+          "grok_exp": "(?:(?:(?:[A-Fa-f0-9]{4}\\.){2}[A-Fa-f0-9]{4})|(?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})|(?:(?:[A-Fa-f0-9]{2}:){5}[A-Fa-f0-9]{2}))"
+        },
+        {
+          "grok_name": "DST_PORT",
+          "grok_exp": "(?:6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|5\\d{4}|[0-9]\\d{0,4})|(?:-)"
+        },
+        {
+          "grok_name": "DURATION",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "EMP_CODE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "EMP_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "EMP_TYPE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "END_TIME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "EVENT_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "EVENT_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "FACILITYNO",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "FILE_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "FILE_PATH",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "FILE_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "HOST_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "HOST_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "HOST_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "INTERFACE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ISEXTGBN",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ISWORKGBN",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "LEVEL",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "LEVELNO",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "LOG_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "LOG_TIME",
+          "grok_exp": "\\d{14}"
+        },
+        {
+          "grok_name": "MAIL",
+          "grok_exp": "\\S*@\\b\\w*\\b\\.[a-zA-Z]*"
+        },
+        {
+          "grok_name": "MESSAGE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "METHOD",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "OBJECT_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "PID",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "POSITION",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "PRI",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "PROTOCOL",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "RECEIVER",
+          "grok_exp": "\\S*@\\b\\w*\\b\\.[a-zA-Z]*"
+        },
+        {
+          "grok_name": "RECEIVER2",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "RECORD_NUMBER",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "RECV_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "RECV_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "SENDER",
+          "grok_exp": "\\S*@\\b\\w*\\b\\.[a-zA-Z]*"
+        },
+        {
+          "grok_name": "SENT_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "SENT_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "SESSION_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SM_TYPE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SOURCE_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SRC_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "SRC_MAC",
+          "grok_exp": "(?:(?:(?:[A-Fa-f0-9]{4}\\.){2}[A-Fa-f0-9]{4})|(?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})|(?:(?:[A-Fa-f0-9]{2}:){5}[A-Fa-f0-9]{2}))"
+        },
+        {
+          "grok_name": "SRC_PORT",
+          "grok_exp": "(?:6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|5\\d{4}|[0-9]\\d{0,4})|(?:-)"
+        },
+        {
+          "grok_name": "START_TIME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "STATUS",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TABLE_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TERMINAL_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TITLE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TMP",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TMP2",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TMP3",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TMP4",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TMP5",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TYPE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "UNIT_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "URL",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "USER_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "USER_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DISK",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "NETWORK",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "PROCESSES",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ELASTICSEARCH",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ISWORK",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "CPU",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "MEM",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "LOAD",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "RULE_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "RULE_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SCENARIO_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SCENARIO_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SCENARIO_NAME_LOWER",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "GROUP_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "GROUP_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "RISK_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "CHANNEL",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TARGET_NAME",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "THRESOLD",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "USED",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "NAT_SRC_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "NAT_SRC_PORT",
+          "grok_exp": "(?:6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|5\\d{4}|[0-9]\\d{0,4})|(?:-)"
+        },
+        {
+          "grok_name": "NAT_DST_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "NAT_DST_PORT",
+          "grok_exp": "(?:6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|5\\d{4}|[0-9]\\d{0,4})|(?:-)"
+        },
+        {
+          "grok_name": "NAT_RULE_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "TCP_FLAG",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "PACKET_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "PACKET_CNT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "REASON",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SESSION_COUNT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "RESULT",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "RECV_FRAME",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "SENT_FRAME",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "COMMAND",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ALLOW_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "ALLOW_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_SIZE",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "SERVICE",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "DEVICE_IP",
+          "grok_exp": "(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))|(?:-)|(?:\\?.\\?.\\?.\\?)|(?:\\{user_ip\\})"
+        },
+        {
+          "grok_name": "DATE_FORMAT1",
+          "grok_exp": "(?:\\d\\d\\d\\d)[\\D](?:0[1-9]|1[0-2])[\\D](?:(?:0[1-9])|(?:[12][0-9])|(?:3[01]))[\\D]*(?:2[0123]|[01][0-9])[\\D](?:[0-5][0-9])[\\D](?:[0-5][0-9]|60)"
+        },
+        {
+          "grok_name": "DATE_FORMAT2",
+          "grok_exp": "(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[\\D](?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[\\D](?:\\d\\d\\d\\d)[\\D]*(?:2[0123]|[01][0-9])[\\D](?:[0-5][0-9])[\\D](?:[0-5][0-9]|60)"
+        },
+        {
+          "grok_name": "DATE_FORMAT3",
+          "grok_exp": "(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[\\D](\\s?)(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[\\D](?:2[0123]|[01]?[0-9])[\\D](?:[0-5][0-9])[\\D](?:[0-5][0-9]|60)"
+        },
+        {
+          "grok_name": "DATE_FORMAT4",
+          "grok_exp": "(?:2[0123]|[01]?[0-9])([?시:])+(?:[0-5]?[0-9])[?분]+(?:(?:[0-5]?[0-9]|60))([?초])?"
+        },
+        {
+          "grok_name": "DATE_FORMAT5",
+          "grok_exp": "(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01]))[\\D](?:0?[1-9]|1[0-2])[\\D](?:\\d\\d\\d\\d)"
+        },
+        {
+          "grok_name": "SKIP",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "SKIP_AHN",
+          "grok_exp": "[^`]*"
+        },
+        {
+          "grok_name": "SKIP_CSV",
+          "grok_exp": "[^,]*"
+        },
+        {
+          "grok_name": "SKIP_SPACE",
+          "grok_exp": "[^\\s]*"
+        },
+        {
+          "grok_name": "SPACE",
+          "grok_exp": "\\s"
+        },
+        {
+          "grok_name": "ALLOW_TCP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "ALLOW_UDP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "ALLOW_ICMP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "ALLOW_ETC_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_TCP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_UDP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_ICMP_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DENY_ETC_PKT",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "ATTACK_ID",
+          "grok_exp": ".*?"
+        },
+        {
+          "grok_name": "ALLOW_SESSION",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "BLOCK_SESSION",
+          "grok_exp": "(?:[0-9]+)"
+        },
+        {
+          "grok_name": "DATE_FORMAT6",
+          "grok_exp": "(?:\\d{8})[`](?:2[0123]|[01][0-9])[\\D](?:[0-5][0-9])[\\D](?:[0-5][0-9]|60)"
+        },
+        {
+          "grok_name": "BATCH",
+          "grok_exp": ".*"
+        },
+        {
+          "grok_name": "NUMBER",
+          "grok_exp": "(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\\.[0-9]+)?)|(?:\\.[0-9]+))))"
+        },
+        {
+          "grok_name": "DATE_FORMAT7",
+          "grok_exp": "(?>\\d\\d){1,2}-(?:0?[1-9]|1[0-2])-(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[T ](?:2[0123]|[01]?[0-9]):?(?:[0-5][0-9])(?::?(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?))?(?:Z|[+-](?:2[0123]|[01]?[0-9])(?::?(?:[0-5][0-9])))?(?: CEST| GMT| EST| PST| CET| EDT| PDT| UTC| BST| IST| AST)?"
+        },
+        {
+          "grok_name": "DATE_FORMAT8",
+          "grok_exp": "(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])/\\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\b/(?>\\d\\d){1,2}:(?:2[0123]|[01]?[0-9]):(?:[0-5][0-9]):(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?)(?:\\.\\d{1,3})?(?: (?:[+-]?(?:[0-9]+)|Z))?"
+        },
+        {
+          "grok_name": "WORD",
+          "grok_exp": "\\b\\w+\\b"
+        },
+        {
+          "grok_name": "BATCH_MULTILINE",
+          "grok_exp": "(.|\\n)*"
+        },
+        {
+          "grok_name": "DATE_FORMAT9",
+          "grok_exp": "(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9]) \\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\b (?>\\d\\d){1,2} (?!<[0-9])(?:2[0123]|[01]?[0-9]):(?:[0-5][0-9])(?::(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?))(?![0-9])"
+        },
+        {
+          "grok_name": "QUERY",
+          "grok_exp": "(.|\\n)*"
+        },
+        {
+          "grok_name": "ELASTIC_INDEX",
+          "grok_exp": "[a-zA-Z0-9_.-]*"
+        },
+        {
+          "grok_name": "GREEDYMULTILINE",
+          "grok_exp": "(.|\\n|\\t)*"
+        },
+        {
+          "grok_name": "NOPIPEGREEDYDATA",
+          "grok_exp": "((?! \\|).)*"
+        },
+        {
+          "grok_name": "THREAD_NAME",
+          "grok_exp": "((?! \\n).)*"
+        },
+        {
+          "grok_name": "DATE_FORMAT10",
+          "grok_exp": "\\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\b +(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9]) (?!<[0-9])(?:2[0123]|[01]?[0-9]):(?:[0-5][0-9])(?::(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?))(?![0-9])"
+        },
+        {
+          "grok_name": "NOTSPACE",
+          "grok_exp": "\\S+"
+        },
+        {
+          "grok_name": "TEXT14",
+          "grok_exp": "([^\\.]*)"
+        },
+        {
+          "grok_name": "TEXT15",
+          "grok_exp": "([^\\t]*)"
+        },
+        {
+          "grok_name": "TEXT16",
+          "grok_exp": "([^\\(]*)"
+        },
+        {
+          "grok_name": "TEXT17",
+          "grok_exp": "([^\\>]*)"
+        },
+        {
+          "grok_name": "TEXT18",
+          "grok_exp": "([^\\']*)"
+        },
+        {
+          "grok_name": "CISCO1",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}02)"
+        },
+        {
+          "grok_name": "CISCO2",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}03)"
+        },
+        {
+          "grok_name": "CISCO3",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}15)"
+        },
+        {
+          "grok_name": "CISCO4",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}13)"
+        },
+        {
+          "grok_name": "CISCO5",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}14)"
+        },
+        {
+          "grok_name": "CISCO6",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}15)"
+        },
+        {
+          "grok_name": "CISCO7",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}16)"
+        },
+        {
+          "grok_name": "CISCO8",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}20)"
+        },
+        {
+          "grok_name": "CISCO9",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{4}21)"
+        },
+        {
+          "grok_name": "CISCO10",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{2}5006)"
+        },
+        {
+          "grok_name": "CISCO11",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{2}5011)"
+        },
+        {
+          "grok_name": "CISCO12",
+          "grok_exp": "([^\\d]*[^\\W]\\-\\d{2}5012)"
+        },
+        {
+          "grok_name": "CISCO13",
+          "grok_exp": "([^\\d]*3\\-\\w{6})"
+        }
+    ]
