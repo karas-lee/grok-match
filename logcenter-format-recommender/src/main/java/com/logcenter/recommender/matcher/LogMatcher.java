@@ -1,5 +1,6 @@
 package com.logcenter.recommender.matcher;
 
+import com.logcenter.recommender.config.AppConfig;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.model.MatchResult;
 import java.util.List;
@@ -67,8 +68,13 @@ public interface LogMatcher {
         private boolean multiline = false;
         private boolean partialMatchEnabled = true;
         private boolean validateFields = true;
-        private int maxMatchTime = 5000; // 밀리초
+        private int maxMatchTime;
         private boolean collectStats = true;
+        
+        public MatchOptions() {
+            // AppConfig에서 타임아웃 설정 읽기
+            this.maxMatchTime = AppConfig.getInstance().getInt(AppConfig.MATCH_TIMEOUT);
+        }
         
         // Getters and Setters
         public boolean isCaseInsensitive() {

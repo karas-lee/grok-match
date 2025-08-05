@@ -1,6 +1,7 @@
 package com.logcenter.recommender;
 
 import com.logcenter.recommender.cli.CliCommand;
+import com.logcenter.recommender.config.ConfigLoader;
 import picocli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,9 @@ public class Main {
     public static void main(String[] args) {
         // 시스템 속성 설정 (로깅 레벨 등)
         configureSystem();
+        
+        // 설정 파일 로드
+        ConfigLoader.initializeConfig();
         
         // CLI 명령 실행
         int exitCode = new CommandLine(new CliCommand())
