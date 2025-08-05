@@ -2,13 +2,12 @@ package com.logcenter.recommender.grok;
 
 import com.logcenter.recommender.config.AppConfig;
 import com.logcenter.recommender.model.LogFormat;
-import com.logcenter.recommender.util.JsonUtils;
-import com.google.gson.reflect.TypeToken;
+import com.logcenter.recommender.util.JacksonJsonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -117,21 +116,42 @@ public class FilePatternRepository implements PatternRepository {
                 content.append(line).append("\n");
             }
             
-            // JSON 파싱
-            Type listType = new TypeToken<List<LogFormat>>(){}.getType();
-            List<LogFormat> formats = JsonUtils.fromJson(content.toString(), listType);
+            // JSON 내용 가져오기
+            String jsonContent = content.toString();
+            
+            // JSON 파싱 (Jackson은 이스케이프 시퀀스를 더 잘 처리함)
+            TypeReference<List<LogFormat>> typeRef = new TypeReference<List<LogFormat>>() {};
+            List<LogFormat> formats = JacksonJsonUtils.fromJson(jsonContent, typeRef);
             
             if (formats == null) {
                 logger.warn("JSON 파싱 결과가 null입니다");
                 return new ArrayList<>();
             }
             
-            // 포맷 ID 생성 (필요한 경우)
+            // 첫 번째 Grok 패턴 설정
             for (LogFormat format : formats) {
-                if (format.getFormatId() == null && 
-                    format.getFormatName() != null && 
-                    format.getFormatVersion() != null) {
-                    format.setFormatId(format.getFormatName() + "_" + format.getFormatVersion());
+                // format_id가 이미 JSON에서 설정되어 있음
+                
+                // 첫 번째 로그 타입의 첫 번째 패턴을 대표 Grok 패턴으로 설정
+                if (format.getGrokPattern() == null && format.getLogTypes() != null) {
+                    for (LogFormat.LogType logType : format.getLogTypes()) {
+                        if (logType.getPatterns() != null && !logType.getPatterns().isEmpty()) {
+                            LogFormat.Pattern firstPattern = logType.getPatterns().get(0);
+                            logger.debug("패턴 이름: {}, Grok 표현식 null 여부: {}", 
+                                firstPattern.getExpName(), 
+                                firstPattern.getGrokExp() == null);
+                            if (firstPattern.getGrokExp() != null) {
+                                // JSON에서 이미 올바르게 이스케이프된 Grok 패턴
+                                format.setGrokPattern(firstPattern.getGrokExp());
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                // 디버깅: grokPattern이 설정되었는지 확인
+                if (format.getGrokPattern() == null && format.getLogTypes() != null && !format.getLogTypes().isEmpty()) {
+                    logger.debug("포맷 {}에 Grok 패턴이 설정되지 않음", format.getFormatId());
                 }
             }
             

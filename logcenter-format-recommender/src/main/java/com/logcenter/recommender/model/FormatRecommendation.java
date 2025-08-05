@@ -20,6 +20,17 @@ public class FormatRecommendation implements Comparable<FormatRecommendation> {
     private int totalPatternsChecked;         // 검사한 총 패턴 수
     private int successfulMatches;            // 성공한 매칭 수
     
+    // 추가 필드들
+    private boolean completeMatch;            // 완전 매칭 여부
+    private boolean partialMatch;             // 부분 매칭 여부
+    private java.util.Map<String, Object> matchedFields; // 매칭된 필드들
+    private List<String> missingFields;       // 누락된 필드들
+    private long matchTime;                   // 매칭 시간
+    private int matchCount;                   // 매칭 횟수
+    private String matchDetails;              // 매칭 상세 정보
+    private String groupName;                 // 그룹명
+    private String vendor;                    // 벤더명
+    
     public FormatRecommendation() {
         this.matchResults = new ArrayList<>();
         this.confidence = 0.0;
@@ -230,6 +241,88 @@ public class FormatRecommendation implements Comparable<FormatRecommendation> {
     
     public void setSuccessfulMatches(int successfulMatches) {
         this.successfulMatches = successfulMatches;
+    }
+    
+    // 추가 필드들의 Getters and Setters
+    public boolean isCompleteMatch() {
+        return completeMatch;
+    }
+    
+    public void setCompleteMatch(boolean completeMatch) {
+        this.completeMatch = completeMatch;
+    }
+    
+    public boolean isPartialMatch() {
+        return partialMatch;
+    }
+    
+    public void setPartialMatch(boolean partialMatch) {
+        this.partialMatch = partialMatch;
+    }
+    
+    public java.util.Map<String, Object> getMatchedFields() {
+        return matchedFields;
+    }
+    
+    public void setMatchedFields(java.util.Map<String, Object> matchedFields) {
+        this.matchedFields = matchedFields;
+    }
+    
+    public long getMatchTime() {
+        return matchTime;
+    }
+    
+    public void setMatchTime(long matchTime) {
+        this.matchTime = matchTime;
+    }
+    
+    public int getMatchCount() {
+        return matchCount;
+    }
+    
+    public void setMatchCount(int matchCount) {
+        this.matchCount = matchCount;
+    }
+    
+    public String getMatchDetails() {
+        return matchDetails;
+    }
+    
+    public void setMatchDetails(String matchDetails) {
+        this.matchDetails = matchDetails;
+    }
+    
+    public String getGroupName() {
+        return groupName;
+    }
+    
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+    
+    public String getVendor() {
+        return vendor;
+    }
+    
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+    
+    public List<String> getMissingFields() {
+        return missingFields;
+    }
+    
+    public void setMissingFields(List<String> missingFields) {
+        this.missingFields = missingFields;
+    }
+    
+    // 편의 메서드들
+    public String getFormatId() {
+        return logFormat != null ? logFormat.getFormatId() : null;
+    }
+    
+    public String getFormatName() {
+        return logFormat != null ? logFormat.getFormatName() : null;
     }
     
     @Override

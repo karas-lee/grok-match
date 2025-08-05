@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.FieldNamingPolicy;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -23,10 +24,14 @@ public class JsonUtils {
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .disableHtmlEscaping()
+            .setLenient()  // 엄격하지 않은 파싱 모드
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
     
     private static final Gson GSON_COMPACT = new GsonBuilder()
             .disableHtmlEscaping()
+            .setLenient()  // 엄격하지 않은 파싱 모드
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
     
     private static final JsonParser JSON_PARSER = new JsonParser();

@@ -37,7 +37,7 @@ public class AppConfig {
         // 기본값 설정
         DEFAULT_VALUES.put(GROK_PATTERNS_PATH, "grok-patterns/patterns");
         DEFAULT_VALUES.put(CUSTOM_GROK_PATTERNS_PATH, "custom-grok-patterns");
-        DEFAULT_VALUES.put(LOG_FORMATS_PATH, "GROK-PATTERN-CONVERTER.sql");
+        DEFAULT_VALUES.put(LOG_FORMATS_PATH, "setting_logformat.json");
         DEFAULT_VALUES.put(PARALLEL_PROCESSING_ENABLED, "true");
         DEFAULT_VALUES.put(PARALLEL_THREAD_COUNT, "4");
         DEFAULT_VALUES.put(CACHE_ENABLED, "true");

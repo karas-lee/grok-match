@@ -5,43 +5,50 @@
 # for parsing various log formats.
 
 # Text patterns - various delimiters and text matching
-TEXT1 ([^\s]*)
-TEXT2 ([^\]]*)
-TEXT3 ([\w]*)
-TEXT4 ([^\,]*)
-TEXT5 ([^\`]*)
-TEXT6 ([^\|]*)
-TEXT7 ([^\)]*)
-TEXT8 ([^\:]*)
-TEXT9 ([^\/]*)
-TEXT10 ([^\-]*)
-TEXT11 ([^\[]*)
-TEXT12 ([^\"]*)
-TEXT13 ([^\r\n]*)
-TEXT14 ([^\.]*)
-TEXT15 ([^\t]*)
-TEXT16 ([^\(]*)
-TEXT17 ([^\>]*)
-TEXT18 ([^\']*)
+TEXT1 [^\s]*
+TEXT2 [^\]]*
+TEXT3 [\w]*
+TEXT4 [^\,]*
+TEXT5 [^\`]*
+TEXT6 [^\|]*
+TEXT7 [^\)]*
+TEXT8 [^\:]*
+TEXT9 [^\/]*
+TEXT10 [^\-]*
+TEXT11 [^\[]*
+TEXT12 [^\"]*
+TEXT13 [^\r\n]*
+TEXT14 [^\.]*
+TEXT15 [^\t]*
+TEXT16 [^\(]*
+TEXT17 [^\>]*
+TEXT18 [^\']*
+TEXT19 .*
 
 # Digit pattern
-DIGIT ([\d]*)
+DIGIT [\d]*
 
 # Keywords and reserved patterns
-KEYWORD1 ([^\s]*\s[^\s]*)
-RESERVED0 (su|login)
-RESERVED1 (useradd)
-RESERVED2 (new user)
-RESERVED3 (userdel)
-RESERVED4 (delete user)
-RESERVED5 (passwd)
-RESERVED6 (icmp)
-RESERVED7 (LOG_ADMITTED)
-RESERVED8 (LOG_DENIED)
-RESERVED9 (fw4_allow|fw4_deny)
-RESERVED10 (1020|1021)
-RESERVED11 (TRAFFIC)
-RESERVED12 (\s0x0\s|\s)
+KEYWORD1 [^\s]*\s[^\s]*
+RESERVED0 (?:su|login)
+RESERVED1 useradd
+RESERVED2 new user
+RESERVED3 userdel
+RESERVED4 delete user
+RESERVED5 passwd
+RESERVED6 icmp
+RESERVED7 LOG_ADMITTED
+RESERVED8 LOG_DENIED
+RESERVED9 (?:fw4_allow|fw4_deny)
+RESERVED10 (?:1020|1021)
+RESERVED11 TRAFFIC
+RESERVED12 (?:\s0x0\s|\s)
+RESERVED13 .*?
+RESERVED14 .*?
+RESERVED15 .*?
+
+# Skip patterns
+SKIP_NUMBER (?:[0-9]+)
 
 # Basic field patterns - generic catch-all patterns
 APP_NAME .*?
@@ -182,8 +189,8 @@ LOG_TIME \d{14}
 # Date formats - various date/time patterns
 DATE_FORMAT1 (?:\d\d\d\d)[\D](?:0[1-9]|1[0-2])[\D](?:(?:0[1-9])|(?:[12][0-9])|(?:3[01]))[\D]*(?:2[0123]|[01][0-9])[\D](?:[0-5][0-9])[\D](?:[0-5][0-9]|60)
 DATE_FORMAT2 (?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[\D](?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[\D](?:\d\d\d\d)[\D]*(?:2[0123]|[01][0-9])[\D](?:[0-5][0-9])[\D](?:[0-5][0-9]|60)
-DATE_FORMAT3 (?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[\D](\s?)(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[\D](?:2[0123]|[01]?[0-9])[\D](?:[0-5][0-9])[\D](?:[0-5][0-9]|60)
-DATE_FORMAT4 (?:2[0123]|[01]?[0-9])([?시:])+(?:[0-5]?[0-9])[?분]+(?:(?:[0-5]?[0-9]|60))([?초])?
+DATE_FORMAT3 (?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[\D](?:\s?)(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[\D](?:2[0123]|[01]?[0-9])[\D](?:[0-5][0-9])[\D](?:[0-5][0-9]|60)
+DATE_FORMAT4 (?:2[0123]|[01]?[0-9])(?:[?시:])+(?:[0-5]?[0-9])[?분]+(?:(?:[0-5]?[0-9]|60))(?:[?초])?
 DATE_FORMAT5 (?:(?:0[1-9])|(?:[12][0-9])|(?:3[01]))[\D](?:0?[1-9]|1[0-2])[\D](?:\d\d\d\d)
 DATE_FORMAT6 (?:\d{8})[`](?:2[0123]|[01][0-9])[\D](?:[0-5][0-9])[\D](?:[0-5][0-9]|60)
 DATE_FORMAT7 (?>\\d\\d){1,2}-(?:0?[1-9]|1[0-2])-(?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])[T ](?:2[0123]|[01]?[0-9]):?(?:[0-5][0-9])(?::?(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?))?(?:Z|[+-](?:2[0123]|[01]?[0-9])(?::?(?:[0-5][0-9])))?(?: CEST| GMT| EST| PST| CET| EDT| PDT| UTC| BST| IST| AST)?
@@ -207,27 +214,27 @@ SPACE \s
 BATCH .*
 NUMBER (?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))))
 WORD \b\w+\b
-BATCH_MULTILINE (.|\\n)*
-QUERY (.|\\n)*
+BATCH_MULTILINE (?:.|\\n)*
+QUERY (?:.|\\n)*
 ELASTIC_INDEX [a-zA-Z0-9_.-]*
-GREEDYMULTILINE (.|\\n|\\t)*
-NOPIPEGREEDYDATA ((?! \|).)*
-THREAD_NAME ((?! \\n).)*
+GREEDYMULTILINE (?:.|\\n|\\t)*
+NOPIPEGREEDYDATA (?:(?! \|).)*
+THREAD_NAME (?:(?! \\n).)*
 NOTSPACE \S+
 
 # Cisco-specific patterns
-CISCO1 ([^\d]*[^\W]\-\d{4}02)
-CISCO2 ([^\d]*[^\W]\-\d{4}03)
-CISCO3 ([^\d]*[^\W]\-\d{4}15)
-CISCO4 ([^\d]*[^\W]\-\d{4}13)
-CISCO5 ([^\d]*[^\W]\-\d{4}14)
-CISCO6 ([^\d]*[^\W]\-\d{4}15)
-CISCO7 ([^\d]*[^\W]\-\d{4}16)
-CISCO8 ([^\d]*[^\W]\-\d{4}20)
-CISCO9 ([^\d]*[^\W]\-\d{4}21)
-CISCO10 ([^\d]*[^\W]\-\d{2}5006)
-CISCO11 ([^\d]*[^\W]\-\d{2}5011)
-CISCO12 ([^\d]*[^\W]\-\d{2}5012)
-CISCO13 ([^\d]*3\-\w{6})
+CISCO1 [^\d]*[^\W]\-\d{4}02
+CISCO2 [^\d]*[^\W]\-\d{4}03
+CISCO3 [^\d]*[^\W]\-\d{4}15
+CISCO4 [^\d]*[^\W]\-\d{4}13
+CISCO5 [^\d]*[^\W]\-\d{4}14
+CISCO6 [^\d]*[^\W]\-\d{4}15
+CISCO7 [^\d]*[^\W]\-\d{4}16
+CISCO8 [^\d]*[^\W]\-\d{4}20
+CISCO9 [^\d]*[^\W]\-\d{4}21
+CISCO10 [^\d]*[^\W]\-\d{2}5006
+CISCO11 [^\d]*[^\W]\-\d{2}5011
+CISCO12 [^\d]*[^\W]\-\d{2}5012
+CISCO13 [^\d]*3\-\w{6}
 
 # End of custom patterns

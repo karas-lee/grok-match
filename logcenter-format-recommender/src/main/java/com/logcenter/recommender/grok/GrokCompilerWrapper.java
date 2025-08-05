@@ -100,12 +100,16 @@ public class GrokCompilerWrapper {
             return cached;
         }
         
+        // 패턴 정규화
+        String normalizedExpression = PatternNormalizer.normalize(grokExpression);
+        
         // 컴파일 및 캐싱
-        Grok grok = compiler.compile(grokExpression);
+        Grok grok = compiler.compile(normalizedExpression);
         compiledPatterns.put(grokExpression, grok);
         
         return grok;
     }
+    
     
     /**
      * 안전한 컴파일 (예외 처리 포함)
@@ -118,6 +122,10 @@ public class GrokCompilerWrapper {
         } catch (GrokException e) {
             logger.debug("Grok 표현식 컴파일 실패: {} - {}", 
                 grokExpression, e.getMessage());
+            return null;
+        } catch (Exception e) {
+            logger.debug("Grok 표현식 컴파일 실패 (기타): {} - {} - {}", 
+                grokExpression, e.getClass().getSimpleName(), e.getMessage());
             return null;
         }
     }
