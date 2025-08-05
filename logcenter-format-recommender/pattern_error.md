@@ -144,6 +144,26 @@ mvn exec:java -Dexec.mainClass="com.logcenter.recommender.test.DetailedPatternTe
 mvn exec:java -Dexec.mainClass="com.logcenter.recommender.test.PatternTestRunner" -Dexec.cleanupDaemonThreads=false
 ```
 
+### 2.5 LEEF 형식 탭 구분자 문제
+
+#### WINS_SNIPER_ONE_1.00_WELF_1
+- **문제**: 탭 문자 구분자 불일치
+- **패턴**: `^%{TEXT1:log_time}\\s<%{PRI:pri}>%{SKIP}\\|%{SKIP}\\|%{SKIP}\\|%{DATA:version}\\|%{DATA:event_name}\\|%{SKIP}\\|[^\\=]*\\=%{TEXT1:device_name}\\s%{SKIP}trycnt\\=%{TEXT1:count}\\s[^\\=]*\\=%{TEXT1:size}\\s...`
+- **샘플**: `20250105214457 <134>LEEF:2.0|Wins|Sniper ONE|3.3|Detect|x09|sensorid=1001[TAB]stime='2025/01/05T21:44:56'[TAB]etime=''[TAB]trycnt=40[TAB]...`
+- **원인**: 
+  - 샘플 로그는 필드 구분자로 탭 문자(`\t`)를 사용
+  - Grok 패턴은 `\\s`(공백)로 매칭을 시도
+  - `\\s`가 탭을 포함하지 않아 매칭 실패
+- **해결**: 
+  ```json
+  // 옵션 1: 탭 문자만 허용
+  "grok_exp": "^%{TEXT1:log_time}\\s<%{PRI:pri}>%{SKIP}\\|%{SKIP}\\|%{SKIP}\\|%{DATA:version}\\|%{DATA:event_name}\\|%{SKIP}\\|[^\\=]*\\=%{TEXT1:device_name}\\t%{SKIP}trycnt\\=%{TEXT1:count}\\t..."
+  
+  // 옵션 2: 공백과 탭 모두 허용
+  "grok_exp": "^%{TEXT1:log_time}\\s<%{PRI:pri}>%{SKIP}\\|%{SKIP}\\|%{SKIP}\\|%{DATA:version}\\|%{DATA:event_name}\\|%{SKIP}\\|[^\\=]*\\=%{TEXT1:device_name}[\\s\\t]%{SKIP}trycnt\\=%{TEXT1:count}[\\s\\t]..."
+  ```
+- **영향**: 다른 LEEF 형식 로그들도 확인 필요 (LEEF는 표준적으로 탭 구분자 사용)
+
 ---
 
-*마지막 업데이트: 2025-08-05*
+*마지막 업데이트: 2025-08-06*

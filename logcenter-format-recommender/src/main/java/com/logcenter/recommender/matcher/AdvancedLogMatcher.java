@@ -547,7 +547,12 @@ public class AdvancedLogMatcher implements LogMatcher {
         
         // 구체적인 필드가 많을수록 높은 점수
         if (specificCount > 0) {
-            score = Math.min(specificCount / 4.0, 1.0);
+            // 2개 이상이면 0.5 이상의 점수를 보장
+            if (specificCount >= 2) {
+                score = Math.min(0.5 + (specificCount - 2) * 0.25, 1.0);
+            } else {
+                score = specificCount * 0.25;
+            }
         }
         
         // 일반적인 필드만 있으면 점수 감소
@@ -578,7 +583,7 @@ public class AdvancedLogMatcher implements LogMatcher {
             baseConfidence = 96.0 + (fieldCount * 0.3);
         } else if (specificScore >= 0.5) {
             // 구체적인 필드들 (2개 정도)
-            baseConfidence = 93.0 + (fieldCount * 0.4);
+            baseConfidence = 95.0 + (fieldCount * 0.5);
         } else if (specificScore >= 0.25) {
             // 약간의 구체적인 필드 (1개)
             baseConfidence = 90.0 + (fieldCount * 0.5);
