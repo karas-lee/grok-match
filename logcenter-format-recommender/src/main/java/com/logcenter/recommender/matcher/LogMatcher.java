@@ -133,7 +133,7 @@ public interface LogMatcher {
         private Map<String, Long> matchesByFormat;
         
         public MatchStatistics() {
-            this.matchesByFormat = new java.util.HashMap<>();
+            this.matchesByFormat = new java.util.concurrent.ConcurrentHashMap<>();
         }
         
         public void recordMatch(MatchResult result) {
