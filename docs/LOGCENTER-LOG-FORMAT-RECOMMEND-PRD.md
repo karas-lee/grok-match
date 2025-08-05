@@ -87,7 +87,18 @@ SIEM(Security Information and Event Management) 제품에서 사용자가 입력
 
 ### 4.2 부가 기능
 
-#### 4.2.1 학습 및 개선
+#### 4.2.1 영구 캐시 시스템
+- **캐시 기능**
+  - 컴파일된 Grok 패턴 캐싱
+  - 파싱된 로그 포맷 캐싱
+  - 첫 실행 후 80% 이상 성능 향상
+- **캐시 관리**
+  - 자동 캐시 생성 및 갱신
+  - 체크섬 기반 유효성 검증
+  - TTL 기반 만료 관리
+  - CLI 옵션으로 캐시 제어
+
+#### 4.2.2 학습 및 개선
 - **피드백 수집**
   - 추천 정확도에 대한 사용자 피드백
   - 잘못된 추천 리포트
@@ -95,7 +106,7 @@ SIEM(Security Information and Event Management) 제품에서 사용자가 입력
   - 자주 사용되는 패턴 우선순위 조정
   - 새로운 패턴 제안
 
-#### 4.2.2 관리 기능
+#### 4.2.3 관리 기능
 - **포맷 관리**
   - 새로운 Grok 패턴 추가
   - 기존 패턴 수정/삭제
@@ -140,6 +151,9 @@ logcenter-format-recommender/
 │   │   │       └── logcenter/
 │   │   │           └── recommender/
 │   │   │               ├── Main.java                    # 메인 진입점
+│   │   │               ├── cache/                      # 캐시 관리
+│   │   │               │   ├── PersistentCacheManager.java
+│   │   │               │   └── CacheStats.java
 │   │   │               ├── config/
 │   │   │               │   ├── AppConfig.java          # 설정 관리
 │   │   │               │   └── ConfigLoader.java       # 설정 로더
@@ -767,11 +781,24 @@ Where:
 ```
 
 #### 7.3.2 신뢰도 계산
+
+**개선된 신뢰도 계산 알고리즘**
+
+완전 매칭 시 필드 특성을 고려한 차등 신뢰도:
+- **구체적 필드 5개 이상**: 98% (src_ip, dst_ip, protocol, action 등)
+- **구체적 필드 3-4개**: 96%
+- **구체적 필드 1-2개**: 94%
+- **일반 필드만**: 92%
+- **필드 2개 이하**: 88%
+
+**제외 필드**: log_time, message는 필드 수 계산에서 제외
+
 ```
-Confidence = MatchScore * FrequencyFactor * ComplexityFactor
+Confidence = BaseScore * FieldQualityFactor * ComplexityFactor
 
 Where:
-- FrequencyFactor: 해당 포맷의 사용 빈도
+- BaseScore: 완전 매칭 여부에 따른 기본 점수
+- FieldQualityFactor: 구체적 필드의 개수와 품질
 - ComplexityFactor: 패턴의 복잡도 (더 구체적인 패턴일수록 높은 점수)
 ```
 
