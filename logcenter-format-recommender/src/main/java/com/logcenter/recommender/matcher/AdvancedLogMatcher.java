@@ -2,7 +2,6 @@ package com.logcenter.recommender.matcher;
 
 import com.logcenter.recommender.grok.FieldValidator;
 import com.logcenter.recommender.grok.GrokCompilerWrapper;
-import com.logcenter.recommender.grok.validator.*;
 import com.logcenter.recommender.model.LogFormat;
 import com.logcenter.recommender.model.MatchResult;
 import com.logcenter.recommender.filter.PatternFilter;
@@ -46,35 +45,8 @@ public class AdvancedLogMatcher implements LogMatcher {
      * 필드 검증기 초기화
      */
     private Map<String, FieldValidator> initializeValidators() {
-        Map<String, FieldValidator> validators = new HashMap<>();
-        
-        // IP 검증기
-        validators.put("IP", new IPValidator());
-        validators.put("SRC_IP", new IPValidator());
-        validators.put("DST_IP", new IPValidator());
-        validators.put("CLIENT_IP", new IPValidator());
-        validators.put("SERVER_IP", new IPValidator());
-        
-        // 포트 검증기
-        validators.put("PORT", new PortValidator());
-        validators.put("SRC_PORT", new PortValidator());
-        validators.put("DST_PORT", new PortValidator());
-        validators.put("CLIENT_PORT", new PortValidator());
-        validators.put("SERVER_PORT", new PortValidator());
-        
-        // 타임스탬프 검증기
-        validators.put("TIMESTAMP", new TimestampValidator());
-        validators.put("DATE", new TimestampValidator());
-        validators.put("TIME", new TimestampValidator());
-        validators.put("DATETIME", new TimestampValidator());
-        validators.put("LOG_TIME", new TimestampValidator());
-        
-        // HTTP 상태 코드 검증기
-        validators.put("HTTP_STATUS", new HTTPStatusValidator());
-        validators.put("STATUS_CODE", new HTTPStatusValidator());
-        validators.put("RESPONSE_CODE", new HTTPStatusValidator());
-        
-        return validators;
+        // FieldValidator 클래스의 팩토리 메소드 사용
+        return FieldValidator.createValidators();
     }
     
     /**
@@ -209,8 +181,8 @@ public class AdvancedLogMatcher implements LogMatcher {
                 filteredCaptures  // 필터링된 결과 사용
             );
             
-            // 필드 수와 구체성에 따라 초기 신뢰도 조정
-            adjustConfidenceByFieldQuality(result, originalCaptures);
+            // 필드 수와 구체성에 따라 초기 신뢰도 조정 - 필터링된 필드 기준
+            adjustConfidenceByFieldQuality(result, filteredCaptures);
             
             // 그룹 가중치 적용
             applyGroupWeight(result, logFormat);
@@ -386,10 +358,11 @@ public class AdvancedLogMatcher implements LogMatcher {
     }
     
     /**
-     * 필드 검증
+     * 필드 검증 - 의미적 검증 추가
      */
     private Map<String, Object> validateFields(Map<String, Object> fields) {
         Map<String, Object> validatedFields = new HashMap<>();
+        int semanticMismatchCount = 0;
         
         for (Map.Entry<String, Object> entry : fields.entrySet()) {
             String fieldName = entry.getKey();
@@ -399,10 +372,21 @@ public class AdvancedLogMatcher implements LogMatcher {
                 continue;
             }
             
+            String lowerFieldName = fieldName.toLowerCase();
+            String stringValue = fieldValue.toString();
+            
             // 검증기 찾기
-            FieldValidator validator = fieldValidators.get(fieldName.toUpperCase());
+            FieldValidator validator = fieldValidators.get(lowerFieldName);
             if (validator != null) {
-                String stringValue = fieldValue.toString();
+                // 의미적 검증 수행
+                if (!validator.validateSemantics(fieldName, stringValue)) {
+                    semanticMismatchCount++;
+                    logger.debug("필드 의미 불일치: {} = {} (예상 타입: {})", 
+                        fieldName, fieldValue, validator.getFieldType());
+                    continue; // 의미가 맞지 않는 필드는 제외
+                }
+                
+                // 기본 검증
                 if (validator.validate(stringValue)) {
                     validatedFields.put(fieldName, fieldValue);
                 } else {
@@ -412,6 +396,12 @@ public class AdvancedLogMatcher implements LogMatcher {
                 // 검증기가 없는 필드는 그대로 포함
                 validatedFields.put(fieldName, fieldValue);
             }
+        }
+        
+        // 의미 불일치가 너무 많으면 빈 맵 반환 (매칭 거부)
+        if (semanticMismatchCount > 2) {
+            logger.debug("너무 많은 의미 불일치 ({})로 인해 매칭 거부", semanticMismatchCount);
+            return new HashMap<>();
         }
         
         return validatedFields;
@@ -564,7 +554,7 @@ public class AdvancedLogMatcher implements LogMatcher {
     }
     
     /**
-     * 필드 품질에 따른 신뢰도 조정
+     * 필드 품질에 따른 신뢰도 조정 - 강화된 페널티 적용
      */
     private void adjustConfidenceByFieldQuality(MatchResult result, Map<String, Object> captures) {
         if (!result.isCompleteMatch()) {
@@ -575,25 +565,49 @@ public class AdvancedLogMatcher implements LogMatcher {
         int fieldCount = getEffectiveFieldCount(captures);
         double specificScore = calculateSpecificFieldScore(captures);
         
-        // 기본 신뢰도: 88-98% 범위
-        double baseConfidence;
-        
-        if (specificScore >= 0.75) {
-            // 매우 구체적인 필드들 (src_ip, dst_ip, protocol 등이 3개 이상)
-            baseConfidence = 96.0 + (fieldCount * 0.3);
-        } else if (specificScore >= 0.5) {
-            // 구체적인 필드들 (2개 정도)
-            baseConfidence = 95.0 + (fieldCount * 0.5);
-        } else if (specificScore >= 0.25) {
-            // 약간의 구체적인 필드 (1개)
-            baseConfidence = 90.0 + (fieldCount * 0.5);
-        } else {
-            // 일반적인 필드들만 있는 경우
-            baseConfidence = 88.0 + (fieldCount * 0.3);
+        // 필드 수가 2개 이하일 때 강한 페널티
+        if (fieldCount <= 2) {
+            // 구체적인 필드가 2개 이상 있어도 최대 70%
+            double baseConfidence = 50.0 + (fieldCount * 5.0) + (specificScore * 10.0);
+            result.setConfidence(Math.min(baseConfidence, 70.0));
+            logger.debug("필드 수 부족으로 신뢰도 하향: fieldCount={}, confidence={}", 
+                fieldCount, result.getConfidence());
+            return;
         }
         
-        // 최대 98% 제한
-        result.setConfidence(Math.min(baseConfidence, 98.0));
+        // 기본 신뢰도 계산 (3개 이상일 때)
+        double baseConfidence;
+        
+        if (fieldCount <= 3) {
+            // 3개일 때: 최대 80%
+            if (specificScore >= 0.75) {
+                baseConfidence = 75.0 + (specificScore * 5.0);
+            } else {
+                baseConfidence = 70.0 + (specificScore * 10.0);
+            }
+            result.setConfidence(Math.min(baseConfidence, 80.0));
+        } else if (fieldCount <= 5) {
+            // 4-5개일 때: 최대 90%
+            if (specificScore >= 0.5) {
+                baseConfidence = 85.0 + (fieldCount * 1.0);
+            } else {
+                baseConfidence = 80.0 + (fieldCount * 2.0);
+            }
+            result.setConfidence(Math.min(baseConfidence, 90.0));
+        } else {
+            // 6개 이상일 때: 정상 범위 (88-98%)
+            if (specificScore >= 0.75) {
+                baseConfidence = 94.0 + (Math.min(fieldCount - 6, 8) * 0.5);
+            } else if (specificScore >= 0.5) {
+                baseConfidence = 92.0 + (Math.min(fieldCount - 6, 8) * 0.5);
+            } else {
+                baseConfidence = 88.0 + (Math.min(fieldCount - 6, 8) * 0.5);
+            }
+            result.setConfidence(Math.min(baseConfidence, 98.0));
+        }
+        
+        logger.debug("신뢰도 조정: fieldCount={}, specificScore={:.2f}, confidence={}", 
+            fieldCount, specificScore, result.getConfidence());
     }
     
     /**
@@ -620,46 +634,9 @@ public class AdvancedLogMatcher implements LogMatcher {
      * 다중 완전 매칭 시 신뢰도 조정
      */
     private void adjustMultipleMatchConfidence(List<MatchResult> results) {
-        long completeMatchCount = results.stream()
-            .filter(MatchResult::isCompleteMatch)
-            .count();
-        
-        if (completeMatchCount > 1) {
-            // 필드 수와 구체성에 따라 신뢰도 차등 적용
-            for (MatchResult result : results) {
-                if (result.isCompleteMatch()) {
-                    Map<String, Object> fields = result.getExtractedFields();
-                    // log_time과 message 필드를 제외한 필드 수 계산
-                    int fieldCount = getEffectiveFieldCount(fields);
-                    
-                    // 구체적인 필드 수 계산
-                    Set<String> specificFields = new HashSet<>(Arrays.asList(
-                        "src_ip", "dst_ip", "src_port", "dst_port",
-                        "protocol", "action", "rule_id", "attack_id",
-                        "user_id", "session_id", "event_id",
-                        "src", "dst", "source", "destination"
-                    ));
-                    
-                    long specificCount = fields.keySet().stream()
-                        .filter(key -> specificFields.contains(key.toLowerCase()))
-                        .count();
-                    
-                    // 기본 신뢰도 설정
-                    double baseConfidence = 90.0;
-                    
-                    // 필드 수에 따른 가산점 (최대 5점)
-                    double fieldBonus = Math.min(fieldCount * 0.5, 5.0);
-                    
-                    // 구체적인 필드에 따른 가산점 (최대 3점)
-                    double specificBonus = Math.min(specificCount * 1.0, 3.0);
-                    
-                    double adjustedConfidence = baseConfidence + fieldBonus + specificBonus;
-                    
-                    // 최대 98% 제한
-                    result.setConfidence(Math.min(adjustedConfidence, 98.0));
-                }
-            }
-        }
+        // 이미 adjustConfidenceByFieldQuality에서 처리되므로
+        // 추가 조정은 필요 없음
+        // 각 결과의 신뢰도는 이미 필드 수와 구체성에 따라 설정됨
     }
     
     /**

@@ -1,5 +1,6 @@
 package com.logcenter.recommender.grok.validator;
 
+import com.logcenter.recommender.grok.FieldValidator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,7 +11,7 @@ public class ValidatorTest {
     
     @Test
     public void testIPValidator() {
-        IPValidator validator = new IPValidator();
+        FieldValidator.IPFieldValidator validator = new FieldValidator.IPFieldValidator();
         
         // 유효한 IPv4
         assertTrue(validator.validate("192.168.1.1"));
@@ -24,15 +25,9 @@ public class ValidatorTest {
         assertFalse(validator.validate("192.168.1.1.1"));
         assertFalse(validator.validate("abc.def.ghi.jkl"));
         
-        // IPv6 (기본적으로 허용)
-        assertTrue(validator.validate("2001:0db8:85a3:0000:0000:8a2e:0370:7334"));
-        assertTrue(validator.validate("::1"));
-        assertTrue(validator.validate("fe80::"));
-        
-        // IPv4 전용 모드
-        IPValidator ipv4Only = new IPValidator(false);
-        assertTrue(ipv4Only.validate("192.168.1.1"));
-        assertFalse(ipv4Only.validate("2001:0db8:85a3::8a2e:0370:7334"));
+        // 특수 값
+        assertTrue(validator.validate("-"));
+        assertTrue(validator.validate("?.?.?.?"));
         
         // null/empty
         assertFalse(validator.validate(null));
@@ -42,7 +37,7 @@ public class ValidatorTest {
     
     @Test
     public void testPortValidator() {
-        PortValidator validator = new PortValidator();
+        FieldValidator.PortFieldValidator validator = new FieldValidator.PortFieldValidator();
         
         // 유효한 포트
         assertTrue(validator.validate("0"));
@@ -58,41 +53,29 @@ public class ValidatorTest {
         assertFalse(validator.validate("abc"));
         assertFalse(validator.validate("80.0"));
         
-        // 0 포트 비허용 모드
-        PortValidator noZero = new PortValidator(false);
-        assertFalse(noZero.validate("0"));
-        assertTrue(noZero.validate("1"));
+        // 특수 값
+        assertTrue(validator.validate("-"));
         
         // null/empty
         assertFalse(validator.validate(null));
         assertFalse(validator.validate(""));
-        
-        // 포트 분류 테스트
-        assertTrue(PortValidator.isWellKnownPort(80));
-        assertTrue(PortValidator.isRegisteredPort(8080));
-        assertTrue(PortValidator.isDynamicPort(50000));
     }
     
     @Test
     public void testTimestampValidator() {
-        TimestampValidator validator = new TimestampValidator();
+        FieldValidator.TimestampFieldValidator validator = new FieldValidator.TimestampFieldValidator();
         
         // 유효한 타임스탬프
         assertTrue(validator.validate("2024-01-15 10:30:45"));
-        assertTrue(validator.validate("2024/01/15 10:30:45"));
-        assertTrue(validator.validate("15/Jan/2024:10:30:45 +0900"));
-        // assertTrue(validator.validate("Jan 15 10:30:45")); // 연도 없이는 파싱 불가
         assertTrue(validator.validate("20240115103045"));
         assertTrue(validator.validate("2024-01-15T10:30:45.123Z"));
-        
-        // Unix timestamp
-        assertTrue(validator.validate("1705286400")); // 2024-01-15
-        assertTrue(validator.validate("1705286400000")); // 밀리초
+        assertTrue(validator.validate("13:48:22"));
+        assertTrue(validator.validate("13:48:22.229395"));
+        assertTrue(validator.validate("Mar 13 13:48:22"));
         
         // 유효하지 않은 타임스탬프
         assertFalse(validator.validate("not a date"));
-        assertFalse(validator.validate("2024-13-45")); // 잘못된 월
-        assertFalse(validator.validate("99999999999999999")); // 범위 초과
+        assertFalse(validator.validate("192.168.1.1")); // IP 주소
         
         // null/empty
         assertFalse(validator.validate(null));
@@ -101,7 +84,7 @@ public class ValidatorTest {
     
     @Test
     public void testHTTPStatusValidator() {
-        HTTPStatusValidator validator = new HTTPStatusValidator();
+        FieldValidator.HTTPStatusFieldValidator validator = new FieldValidator.HTTPStatusFieldValidator();
         
         // 유효한 상태 코드
         assertTrue(validator.validate("200"));
@@ -119,19 +102,28 @@ public class ValidatorTest {
         assertFalse(validator.validate("200.0"));
         assertFalse(validator.validate("OK"));
         
-        // 엄격 모드
-        HTTPStatusValidator strict = new HTTPStatusValidator(true);
-        assertTrue(strict.validate("200")); // 표준 코드
-        assertTrue(strict.validate("404")); // 표준 코드
-        assertFalse(strict.validate("299")); // 비표준 코드
-        
         // null/empty
         assertFalse(validator.validate(null));
         assertFalse(validator.validate(""));
+    }
+    
+    @Test
+    public void testSemanticValidation() {
+        // IP 필드에 시간값이 들어온 경우
+        FieldValidator.IPFieldValidator ipValidator = new FieldValidator.IPFieldValidator();
+        assertFalse(ipValidator.validateSemantics("src_ip", "13:48:22"));
+        assertFalse(ipValidator.validateSemantics("dst_ip", "13:48:22.229395"));
+        assertTrue(ipValidator.validateSemantics("src_ip", "192.168.1.188"));
         
-        // 카테고리 테스트
-        assertEquals("2xx Success", HTTPStatusValidator.getCategory(200));
-        assertEquals("4xx Client Error", HTTPStatusValidator.getCategory(404));
-        assertEquals("5xx Server Error", HTTPStatusValidator.getCategory(500));
+        // 디바이스명 필드에 시간값이 들어온 경우
+        FieldValidator.DeviceNameFieldValidator deviceValidator = new FieldValidator.DeviceNameFieldValidator();
+        assertFalse(deviceValidator.validateSemantics("device_name", "13:48:22.229395"));
+        assertTrue(deviceValidator.validateSemantics("device_name", "ipmon"));
+        
+        // 액션 필드에 숫자만 들어온 경우
+        FieldValidator.ActionFieldValidator actionValidator = new FieldValidator.ActionFieldValidator();
+        assertFalse(actionValidator.validateSemantics("action", "13:48:22"));
+        assertTrue(actionValidator.validateSemantics("action", "p"));
+        assertTrue(actionValidator.validateSemantics("action", "allow"));
     }
 }

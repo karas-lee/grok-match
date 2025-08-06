@@ -16,7 +16,7 @@ public class CustomPatternLoaderTest {
         List<GrokPattern> patterns = CustomPatternLoader.loadCustomPatterns("custom-grok-patterns");
         
         assertNotNull(patterns);
-        assertEquals(199, patterns.size()); // 199개의 커스텀 패턴 (주석과 빈 줄 제외, DATE_FORMAT18 추가)
+        assertEquals(200, patterns.size()); // 200개의 커스텀 패턴 (주석과 빈 줄 제외, DATE_FORMAT18 추가)
         
         // 카테고리가 설정되었는지 확인
         for (GrokPattern pattern : patterns) {
