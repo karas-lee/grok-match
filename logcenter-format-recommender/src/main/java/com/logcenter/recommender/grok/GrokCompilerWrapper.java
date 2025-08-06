@@ -67,14 +67,10 @@ public class GrokCompilerWrapper {
         int loadedCount = 0;
         for (GrokPattern pattern : patterns) {
             try {
-                // 패턴 등록
+                // 패턴 등록만 수행 (컴파일은 필요시에만)
                 compiler.register(pattern.getName(), pattern.getPattern());
-                
-                // 패턴 컴파일 및 캐싱
-                if (pattern.compile(compiler)) {
-                    customPatterns.put(pattern.getName(), pattern);
-                    loadedCount++;
-                }
+                customPatterns.put(pattern.getName(), pattern);
+                loadedCount++;
             } catch (GrokException e) {
                 logger.error("커스텀 패턴 등록 실패: {} - {}", 
                     pattern.getName(), e.getMessage());
@@ -100,14 +96,23 @@ public class GrokCompilerWrapper {
             return cached;
         }
         
-        // 패턴 정규화
-        String normalizedExpression = PatternNormalizer.normalize(grokExpression);
-        
-        // 컴파일 및 캐싱
-        Grok grok = compiler.compile(normalizedExpression);
-        compiledPatterns.put(grokExpression, grok);
-        
-        return grok;
+        // 동기화된 컴파일
+        synchronized (compiledPatterns) {
+            // 다시 한번 캐시 확인 (double-check locking)
+            cached = compiledPatterns.get(grokExpression);
+            if (cached != null) {
+                return cached;
+            }
+            
+            // 패턴 정규화
+            String normalizedExpression = PatternNormalizer.normalize(grokExpression);
+            
+            // 컴파일 및 캐싱
+            Grok grok = compiler.compile(normalizedExpression);
+            compiledPatterns.put(grokExpression, grok);
+            
+            return grok;
+        }
     }
     
     
