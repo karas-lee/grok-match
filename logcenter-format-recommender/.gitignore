@@ -49,7 +49,7 @@ Thumbs.db
 # Application specific
 logs/
 temp/
-cache/
+# cache/  # Java 소스의 cache 패키지는 추적하고, 실제 캐시 디렉토리만 무시
 
 # Test output
 test-output/
